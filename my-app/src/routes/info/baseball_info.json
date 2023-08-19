@@ -1,0 +1,218 @@
+{
+    "nationalities": [
+        {
+            "name": "United States",
+            "value": 70.7
+        },
+        {
+            "name": "Dominican Republic",
+            "value": 11.4
+        },
+        {
+            "name": "Venezuela",
+            "value": 7.1
+        },
+        {
+            "name": "Cuba",
+            "value": 2.2
+        },
+        {
+            "name": "Puerto Rico",
+            "value": 1.9
+        },
+        {
+            "name": "Mexico",
+            "value": 1.6
+        }
+    ],
+    "positions": [
+        {
+            "name": "P",
+            "number": 1
+        },
+        {
+            "name": "C",
+            "number": 2
+        },
+        {
+            "name": "1B",
+            "number": 3
+        },
+        {
+            "name": "2B",
+            "number": 4
+        },
+        {
+            "name": "3B",
+            "number": 5
+        },
+        {
+            "name": "SS",
+            "number": 6
+        },
+        {
+            "name": "LF",
+            "number": 7
+        },
+        {
+            "name": "CF",
+            "number": 8
+        },
+        {
+            "name": "RF",
+            "number": 9
+        }
+    ],
+    "teams": [
+        {
+            "name": "Atlanta Braves",
+            "development": 1,
+            "rank": 1
+        },
+        {
+            "name": "Miami Marlins",
+            "development": 2,
+            "rank": 15
+        },
+        {
+            "name": "New York Mets",
+            "development": 4,
+            "rank": 22
+        },
+        {
+            "name": "Philadelphia Phillies",
+            "development": 2,
+            "rank": 8
+        },
+        {
+            "name": "Washington Nationals",
+            "development": 4,
+            "rank": 26
+        },
+        {
+            "name": "Chicago Cubs",
+            "development": 5,
+            "rank": 12
+        },
+        {
+            "name": "Cincinnati Reds",
+            "development": 5,
+            "rank": 16
+        },
+        {
+            "name": "Milwaukee Brewers",
+            "development": 5,
+            "rank": 9
+        },
+        {
+            "name": "Pittsburgh Pirates",
+            "development": 5,
+            "rank": 25
+        },
+        {
+            "name": "St. Louis Cardinals",
+            "development": 2,
+            "rank": 23
+        },
+        {
+            "name": "Arizona Diamondbacks",
+            "development": 4,
+            "rank": 18
+        },
+        {
+            "name": "Colorado Rockies",
+            "development": 3,
+            "rank": 28
+        },
+        {
+            "name": "Los Angeles Dodgers",
+            "development": 5,
+            "rank": 3
+        },
+        {
+            "name": "San Diego Padres",
+            "development": 4,
+            "rank": 19
+        },
+        {
+            "name": "San Francisco Giants",
+            "development": 3,
+            "rank": 11
+        },
+        {
+            "name": "Baltimore Orioles",
+            "development": 5,
+            "rank": 2
+        },
+        {
+            "name": "Boston Red Sox",
+            "development": 3,
+            "rank": 14
+        },
+        {
+            "name": "New York Yankees",
+            "development": 2,
+            "rank": 17
+        },
+        {
+            "name": "Tampa Bay Rays",
+            "development": 4,
+            "rank": 6
+        },
+        {
+            "name": "Toronto Blue Jays",
+            "development": 1,
+            "rank": 7
+        },
+        {
+            "name": "Chicago White Sox",
+            "development": 2,
+            "rank": 27
+        },
+        {
+            "name": "Cleveland Guardians",
+            "development": 3,
+            "rank": 21
+        },
+        {
+            "name": "Detroit Tigers",
+            "development": 3,
+            "rank": 24
+        },
+        {
+            "name": "Kansas City Royals",
+            "development": 1,
+            "rank": 29
+        },
+        {
+            "name": "Minnesota Twins",
+            "development": 3,
+            "rank": 13
+        },
+        {
+            "name": "Houston Astros",
+            "development": 1,
+            "rank": 5
+        },
+        {
+            "name": "Los Angeles Angels",
+            "development": 1,
+            "rank": 20
+        },
+        {
+            "name": "Oakland Athletics",
+            "development": 1,
+            "rank": 30
+        },
+        {
+            "name": "Seattle Mariners",
+            "development": 2,
+            "rank": 10
+        },
+        {
+            "name": "Texas Rangers",
+            "development": 4,
+            "rank": 4
+        }
+    ]
+}
