@@ -1,10 +1,12 @@
 <script>
-	import baseball_info from './info/baseball_info.json';
+	import OffseasonModal from '../components/OffseasonModal.svelte';
+	import baseball_info from '../info/baseball_info.json';
 
 	let nationality = 'United States',
 		teamName,
 		teamNumber,
-		position = 1;
+		position = 1,
+		offers = [];
 
 	let overall = {
 		contact: {
@@ -22,7 +24,8 @@
 		development: 0
 	};
 
-	let year = 1;
+	let year = 1,
+		isOffseason = false;
 
 	let stats = [],
 		allStarAppearances = 0,
@@ -43,6 +46,7 @@
 	}
 
 	function handleAdvanceYear() {
+		simulateFreeAgency();
 		generateYear();
 
 		year++;
@@ -93,6 +97,23 @@
 		stats = [...stats];
 
 		updateOverall();
+	}
+
+	function simulateFreeAgency() {
+		offers = [];
+		//generate offer one
+		offers.push({
+			team: baseball_info.teams[getRandomInt(0, baseball_info.teams.length)].name,
+			salary: getRandomInt(7, 30),
+			years: getRandomInt(1, 3)
+		});
+		//generate offer two
+		offers.push({
+			team: baseball_info.teams[getRandomInt(0, baseball_info.teams.length)].name,
+			salary: getRandomInt(7, 30),
+			years: getRandomInt(1, 3)
+		});
+		isOffseason = true;
 	}
 
 	function updateOverall() {
@@ -250,3 +271,5 @@
 		{/if}
 	</div>
 {/if}
+
+<OffseasonModal isOpen={isOffseason} {offers} />
