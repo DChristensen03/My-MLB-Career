@@ -22,6 +22,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"flag-icons": "^6.11.0",
 		"wire.css": "^1.2.5"
 	}
 }

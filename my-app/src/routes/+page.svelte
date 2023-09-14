@@ -1,39 +1,49 @@
 <script>
 	import OffseasonModal from '../components/OffseasonModal.svelte';
+	import GameForm from '../components/GameForm.svelte';
+	import StatsTable from '../components/StatsTable.svelte';
 	import baseball_info from '../info/baseball_info.json';
 
-	let nationality = 'United States',
+	let nationality = 'us',
 		teamName,
 		teamNumber,
-		position = 1,
-		offers = [];
+		position = 2,
+		offers = [],
+		lastScore;
 
 	let overall = {
-		contact: {
-			current: 0,
-			potential: 0
+			contact: {
+				current: 0,
+				potential: 0
+			},
+			power: {
+				current: 0,
+				potential: 0
+			},
+			fielding: {
+				current: 0,
+				potential: 0
+			},
+			development: 0
 		},
-		power: {
-			current: 0,
-			potential: 0
-		},
-		fielding: {
-			current: 0,
-			potential: 0
-		},
-		development: 0
-	};
+		lastOverall = {};
 
 	let year = 1,
-		isOffseason = false;
+		isOffseason;
 
 	let stats = [],
 		allStarAppearances = 0,
 		mvps = 0,
 		worldSeries = 0,
+		totalSalary = 0,
 		retired = false;
 
+	let contractPay = 7,
+		contractLength = 1;
+
 	let showStartForm = true;
+
+	$: updateTeam(teamNumber);
 
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -46,10 +56,9 @@
 	}
 
 	function handleAdvanceYear() {
-		simulateFreeAgency();
+		contractLength--;
 		generateYear();
-
-		year++;
+		if (contractLength == 0 && year < 12) simulateFreeAgency();
 	}
 
 	function generatePlayer() {
@@ -68,55 +77,65 @@
 	}
 
 	function generateYear() {
-		const average = Math.round(
+		totalSalary += contractPay;
+		let average = Math.round(
 				(getRandomInt(overall.contact.current - 10, overall.contact.current) / 100) * 500
 			),
-			home_runs = Math.round(
-				overall.power.current * 0.8 +
-					getRandomInt(overall.power.current * 0.8 - 5, overall.power.current * 0.8 + 5)
-			),
+			home_runs = getRandomInt(overall.power.current - 30, overall.power.current - 20),
 			drs = Math.round(
 				((getRandomInt(overall.fielding.current - 10, overall.fielding.current) - 40) / 100) * 20
 			);
 
-		const score = average * 2 + home_runs * 10 + drs * 50;
-		if (score >= 1250) allStarAppearances++;
-		if (score >= 1750) mvps++;
+		if (home_runs < 0) home_runs = 0;
 
-		const teamScore = score + getRandomInt(20, 60 - baseball_info.teams[teamNumber].overall) * 150;
-		if (teamScore > 3000) worldSeries++;
+		const score = average * 2 + home_runs * 10 + drs * 20;
+		if (score >= 700) allStarAppearances++;
+		if (score >= 1000) mvps++;
+		lastScore = score;
+
+		const teamScore = score + getRandomInt(20, 60 - baseball_info.teams[teamNumber].rank) * 150;
+		if (teamScore > 7000) worldSeries++;
 
 		stats.push({
 			year,
 			average,
 			home_runs,
 			drs,
-			score
+			score,
+			teamName
 		});
 
 		stats = [...stats];
 
 		updateOverall();
+		year++;
 	}
 
 	function simulateFreeAgency() {
 		offers = [];
 		//generate offer one
 		offers.push({
-			team: baseball_info.teams[getRandomInt(0, baseball_info.teams.length)].name,
-			salary: getRandomInt(7, 30),
+			number: getRandomInt(0, baseball_info.teams.length - 1),
+			salary: getRandomInt(
+				Math.round(7 * (lastScore / 100)) * 2,
+				Math.round(7 * (lastScore / 100)) * 2 + 2
+			),
 			years: getRandomInt(1, 3)
 		});
 		//generate offer two
 		offers.push({
-			team: baseball_info.teams[getRandomInt(0, baseball_info.teams.length)].name,
-			salary: getRandomInt(7, 30),
+			number: getRandomInt(0, baseball_info.teams.length - 1),
+			salary: getRandomInt(
+				Math.round(7 * (lastScore / 100)),
+				Math.round(7 * (lastScore / 100)) * 2 + 2
+			),
 			years: getRandomInt(1, 3)
 		});
-		isOffseason = true;
+		isOffseason();
 	}
 
 	function updateOverall() {
+		lastOverall = JSON.parse(JSON.stringify(overall));
 		overall.contact.current = checkOverallUpdate(
 			overall.contact.current,
 			overall.contact.potential
@@ -142,134 +161,86 @@
 		retired = true;
 	}
 
-	function reset() {
-		window.location.reload();
+	function updateTeam(number) {
+		if (teamNumber) {
+			teamName = baseball_info.teams[number].name;
+			teamNumber = number;
+		}
+	}
+
+	function handleMessage(event) {
+		if (event.detail.text == 'advanceYear') {
+			handleAdvanceYear();
+		} else if (event.detail.text == 'endCareer') {
+			endCareer();
+		}
 	}
 </script>
 
-<div class-grid="row">
-	<div class="col-offset-1">
-		<h1>Welcome to My MLB Career</h1>
+<div style="width: 100%; height: 100%;">
+	<div class-grid="row">
+		<div class="col-offset-1">
+			<h1>Welcome to My MLB Career</h1>
+		</div>
 	</div>
+
+	{#if showStartForm}
+		<form on:submit|preventDefault={handleSubmitStart}>
+			<div class="row">
+				<div class="field col-offset-2" data-col="2">
+					<label for="nationalities">Nation</label>
+					<select name="nationalities" id="nationalities" bind:value={nationality}>
+						{#each baseball_info.nationalities as nation}
+							<option value={nation.abbreviation}>{nation.name}</option>
+						{/each}
+					</select>
+				</div>
+
+				<div class="field" data-col="2">
+					<label for="positions">Position</label><br />
+					<select name="positions" id="positions" bind:value={position}>
+						{#each baseball_info.positions as position}
+							{#if position.name != 'P'}
+								<option value={position.number}>{position.name}</option>
+							{/if}
+						{/each}
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="field col-offset-2" data-col="2">
+					<input type="submit" />
+				</div>
+			</div>
+		</form>
+	{/if}
+
+	{#if !showStartForm}
+		<GameForm
+			{teamName}
+			{overall}
+			{lastOverall}
+			{nationality}
+			{year}
+			{position}
+			{retired}
+			{contractPay}
+			on:message={handleMessage}
+		/>
+	{/if}
+
+	<br />
+	<br />
+
+	<StatsTable {stats} {allStarAppearances} {mvps} {worldSeries} {retired} {totalSalary} />
+
+	<OffseasonModal
+		bind:open={isOffseason}
+		{offers}
+		bind:teamNumber
+		bind:salary={contractPay}
+		bind:years={contractLength}
+		on:message={handleMessage}
+	/>
 </div>
-
-{#if showStartForm}
-	<form on:submit|preventDefault={handleSubmitStart}>
-		<div class="row">
-			<div class="field col-offset-2" data-col="2">
-				<label for="nationalities">Nation</label>
-				<select name="nationalities" id="nationalities" bind:value={nationality}>
-					{#each baseball_info.nationalities as nation}
-						<option value={nation.name}>{nation.name}</option>
-					{/each}
-				</select>
-			</div>
-
-			<div class="field" data-col="2">
-				<label for="positions">Position</label><br />
-				<select name="positions" id="positions" bind:value={position}>
-					{#each baseball_info.positions as position}
-						<option value={position.number}>{position.name}</option>
-					{/each}
-				</select>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="field col-offset-2" data-col="2">
-				<input type="submit" />
-			</div>
-		</div>
-	</form>
-{/if}
-
-{#if !showStartForm}
-	<div class="row">
-		<div class="col-offset-2">
-			Team: {teamName} <br />
-			Overall: {Math.round(
-				(overall.contact.current + overall.power.current + overall.fielding.current) / 3
-			)}
-			{Math.round(overall.contact.current)}
-			{Math.round(overall.power.current)}
-			{Math.round(overall.fielding.current)}<br />
-			Position: {baseball_info.positions[position - 1].name} <br />
-
-			{#if year !== 13}
-				<form on:submit|preventDefault={handleAdvanceYear}>
-					<div class="row">
-						<div class="field" data-col="2">
-							<input type="submit" value="Play Year {year}" />
-						</div>
-					</div>
-				</form>
-			{:else if !retired}
-				<form on:submit|preventDefault={endCareer}>
-					<div class="row">
-						<div class="field" data-col="2">
-							<input type="submit" value="Retire" />
-						</div>
-					</div>
-				</form>
-			{:else}
-				<form on:submit|preventDefault={reset}>
-					<div class="row">
-						<div class="field" data-col="2">
-							<input type="submit" value="Reset" />
-						</div>
-					</div>
-				</form>
-			{/if}
-		</div>
-	</div>
-{/if}
-
-<br />
-<br />
-
-{#if stats.length > 0}
-	<div class="row">
-		<div class="col-offset-2" data-col="4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>AVG</th>
-					<th>Home Runs</th>
-					<th>DRS</th>
-				</tr>
-				{#each stats as stat}
-					<tr>
-						<th>{stat.year}</th>
-						<th>.{stat.average}</th>
-						<th>{stat.home_runs}</th>
-						<th>{stat.drs}</th>
-					</tr>
-				{/each}
-			</table>
-		</div>
-		{#if retired}
-			<div class="col-offset-1" data-col="4">
-				<table data-table="responsive striped">
-					<tr>
-						<th>All-Stars</th>
-						<th>MVPs</th>
-						<th>World Series</th>
-						<th>Hall of Fame</th>
-					</tr>
-					<tr>
-						<th>{allStarAppearances}</th>
-						<th>{mvps}</th>
-						<th>{worldSeries}</th>
-						{#if allStarAppearances + mvps * 4 >= 15}
-							<th>✓</th>
-						{:else}
-							<th>✗</th>
-						{/if}
-					</tr>
-				</table>
-			</div>
-		{/if}
-	</div>
-{/if}
-
-<OffseasonModal isOpen={isOffseason} {offers} />

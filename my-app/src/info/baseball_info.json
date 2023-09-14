@@ -2,26 +2,32 @@
     "nationalities": [
         {
             "name": "United States",
+            "abbreviation": "us",
             "value": 70.7
         },
         {
             "name": "Dominican Republic",
+            "abbreviation": "do",
             "value": 11.4
         },
         {
             "name": "Venezuela",
+            "abbreviation": "ve",
             "value": 7.1
         },
         {
             "name": "Cuba",
+            "abbreviation": "cu",
             "value": 2.2
         },
         {
             "name": "Puerto Rico",
+            "abbreviation": "pr",
             "value": 1.9
         },
         {
             "name": "Mexico",
+            "abbreviation": "mx",
             "value": 1.6
         }
     ],
