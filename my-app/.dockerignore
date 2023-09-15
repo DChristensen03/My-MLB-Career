@@ -1,0 +1,8 @@
+.svelte-kit
+node_modules
+npm-debug.log
+
+.prettierrc
+.prettierignore
+.gitignore
+.eslintrc.cjs.eslintignore

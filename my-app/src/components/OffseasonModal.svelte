@@ -35,14 +35,14 @@
 
 {#if isOpen}
 	<Modal showModal={isOpen}>
-		<div class="row" slot="header">
+		<div data-grid="row" slot="header">
 			<h2>
 				Offseason Contracts <br />
 				<small>View your offseason contract offers</small>
 			</h2>
 		</div>
 
-		<div class="row">
+		<div data-grid="row">
 			<table data-table="responsive striped">
 				<tr>
 					<th>Team</th>
@@ -59,31 +59,33 @@
 			</table>
 		</div>
 
-		<div class="row">
-			<div data-col="4">
-				<button
-					class="center-center"
-					on:click={() => {
-						selectTeam(0);
-					}}>Offer A</button
-				>
+		<form class="form">
+			<div data-grid="row">
+				<div data-col="4">
+					<button
+						class="button small center-center"
+						on:click={() => {
+							selectTeam(0);
+						}}>Offer A</button
+					>
+				</div>
+				<div data-col="4">
+					<button
+						class="button small center-center"
+						on:click={() => {
+							selectTeam(1);
+						}}>Offer B</button
+					>
+				</div>
+				<div data-col="4">
+					<button
+						class="button small center-center"
+						on:click={() => {
+							selectTeam(2);
+						}}>Current Team</button
+					>
+				</div>
 			</div>
-			<div data-col="4">
-				<button
-					class="center-center"
-					on:click={() => {
-						selectTeam(1);
-					}}>Offer B</button
-				>
-			</div>
-			<div data-col="4">
-				<button
-					class="center-center"
-					on:click={() => {
-						selectTeam(2);
-					}}>Current Team</button
-				>
-			</div>
-		</div>
+		</form>
 	</Modal>
 {/if}

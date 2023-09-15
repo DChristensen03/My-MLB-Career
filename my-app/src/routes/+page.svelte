@@ -3,6 +3,8 @@
 	import GameForm from '../components/GameForm.svelte';
 	import StatsTable from '../components/StatsTable.svelte';
 	import baseball_info from '../info/baseball_info.json';
+	import '/node_modules/flag-icons/css/flag-icons.min.css';
+	import RetireTable from '../components/RetireTable.svelte';
 
 	let nationality = 'us',
 		teamName,
@@ -58,22 +60,37 @@
 	function handleAdvanceYear() {
 		contractLength--;
 		generateYear();
-		if (contractLength == 0 && year < 12) simulateFreeAgency();
+		if (contractLength == 0 && year <= 12) simulateFreeAgency();
 	}
 
 	function generatePlayer() {
-		overall.contact.potential = getRandomInt(30, 100);
-		overall.power.potential = getRandomInt(30, 100);
-		overall.fielding.potential = getRandomInt(30, 100);
-
-		overall.contact.current = getRandomInt(15, overall.contact.potential);
-		overall.power.current = getRandomInt(5, overall.power.potential);
-		overall.fielding.current = getRandomInt(20, overall.fielding.potential);
-
-		overall.development = getRandomInt(1, 10);
+		const choseNation = baseball_info.nationalities.find(
+			(nation) => nation.abbreviation === nationality
+		);
+		const chosePosition = baseball_info.positions[position - 1];
 
 		teamNumber = getRandomInt(0, baseball_info.teams.length - 1);
 		teamName = baseball_info.teams[teamNumber].name;
+
+		overall.contact.potential = getRandomInt(25, 90) + choseNation.contact + chosePosition.contact;
+		overall.power.potential = getRandomInt(25, 90) + choseNation.power + chosePosition.power;
+		overall.fielding.potential =
+			getRandomInt(25, 90) + choseNation.fielding + chosePosition.fielding;
+
+		overall.contact.current = getRandomInt(
+			20 + choseNation.contact + chosePosition.contact,
+			overall.contact.potential
+		);
+		overall.power.current = getRandomInt(
+			20 + choseNation.power + chosePosition.power,
+			overall.power.potential
+		);
+		overall.fielding.current = getRandomInt(
+			20 + choseNation.fielding + chosePosition.fielding,
+			overall.fielding.potential
+		);
+
+		overall.development = getRandomInt(1, 10);
 	}
 
 	function generateYear() {
@@ -122,6 +139,9 @@
 			),
 			years: getRandomInt(1, 3)
 		});
+		while (offers[0].number == teamNumber) {
+			offers[0].number = getRandomInt(0, baseball_info.teams.length - 1);
+		}
 		//generate offer two
 		offers.push({
 			number: getRandomInt(0, baseball_info.teams.length - 1),
@@ -131,6 +151,9 @@
 			),
 			years: getRandomInt(1, 3)
 		});
+		while (offers[1].number == teamNumber || offers[0].number == offers[1].number) {
+			offers[1].number = getRandomInt(0, baseball_info.teams.length - 1);
+		}
 		isOffseason();
 	}
 
@@ -159,6 +182,7 @@
 
 	function endCareer() {
 		retired = true;
+		console.log(retired);
 	}
 
 	function updateTeam(number) {
@@ -177,63 +201,85 @@
 	}
 </script>
 
-<div style="width: 100%; height: 100%;">
-	<div class-grid="row">
-		<div class="col-offset-1">
-			<h1>Welcome to My MLB Career</h1>
+<div data-grid>
+	<div data-grid="row">
+		<div class-grid="col" class="col-offset-0">
+			<div class="col-11">
+				<h1>Welcome to My MLB Career</h1>
+			</div>
 		</div>
 	</div>
 
 	{#if showStartForm}
-		<form on:submit|preventDefault={handleSubmitStart}>
-			<div class="row">
-				<div class="field col-offset-2" data-col="2">
-					<label for="nationalities">Nation</label>
-					<select name="nationalities" id="nationalities" bind:value={nationality}>
-						{#each baseball_info.nationalities as nation}
-							<option value={nation.abbreviation}>{nation.name}</option>
-						{/each}
-					</select>
-				</div>
+		<div data-grid="row">
+			<div class-grid="col" class="col-offset-0">
+				<form class="form" on:submit|preventDefault={handleSubmitStart}>
+					<div data-grid="row">
+						<div class="field" data-col="2">
+							<label for="nationalities">Nation</label>
+							<select name="nationalities" id="nationalities" bind:value={nationality}>
+								{#each baseball_info.nationalities as nation}
+									<option value={nation.abbreviation}>{nation.name}</option>
+								{/each}
+							</select>
+						</div>
+						<div class="field" data-col="2">
+							<label for="positions">Position</label><br />
+							<select name="positions" id="positions" bind:value={position}>
+								{#each baseball_info.positions as position}
+									{#if position.name != 'P'}
+										<option value={position.number}>{position.name}</option>
+									{/if}
+								{/each}
+							</select>
+						</div>
+					</div>
 
-				<div class="field" data-col="2">
-					<label for="positions">Position</label><br />
-					<select name="positions" id="positions" bind:value={position}>
-						{#each baseball_info.positions as position}
-							{#if position.name != 'P'}
-								<option value={position.number}>{position.name}</option>
-							{/if}
-						{/each}
-					</select>
-				</div>
+					<div data-grid="row">
+						<div class="col-5">
+							<input type="submit" />
+						</div>
+					</div>
+				</form>
 			</div>
-
-			<div class="row">
-				<div class="field col-offset-2" data-col="2">
-					<input type="submit" />
-				</div>
-			</div>
-		</form>
+		</div>
 	{/if}
 
 	{#if !showStartForm}
-		<GameForm
-			{teamName}
-			{overall}
-			{lastOverall}
-			{nationality}
-			{year}
-			{position}
-			{retired}
-			{contractPay}
-			on:message={handleMessage}
-		/>
+		<div data-grid="row">
+			<div class-grid="col" class="col-offset-0">
+				<GameForm
+					{teamName}
+					{overall}
+					{lastOverall}
+					{nationality}
+					{year}
+					{position}
+					{retired}
+					{contractPay}
+					on:message={handleMessage}
+				/>
+			</div>
+		</div>
 	{/if}
 
-	<br />
-	<br />
+	<div data-grid="row" />
 
-	<StatsTable {stats} {allStarAppearances} {mvps} {worldSeries} {retired} {totalSalary} />
+	{#if stats.length > 0}
+		<div data-grid="row">
+			<div class-grid="col" class="col-offset-0">
+				<StatsTable {stats} />
+			</div>
+		</div>
+	{/if}
+
+	{#if retired}
+		<div data-grid="row">
+			<div class-grid="col" class="col-offset-0">
+				<RetireTable {stats} {allStarAppearances} {mvps} {worldSeries} {totalSalary} />
+			</div>
+		</div>
+	{/if}
 
 	<OffseasonModal
 		bind:open={isOffseason}

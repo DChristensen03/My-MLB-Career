@@ -40,44 +40,53 @@
 	}
 </script>
 
-<div class="row">
-	<div class="col-offset-2">
-		Team: {teamName} <br />
+<div data-grid="row">
+	<div class="col-11">
+		Team: {teamName}
+	</div>
+</div>
+<div data-grid="row">
+	<div class="col-11">
 		Overall:
 		<span style="color:{avgOverall > lastAvg ? 'green' : avgOverall == lastAvg ? '' : 'red'};">
 			{avgOverall}
 		</span>
-		{Math.round(overall.contact.current)}
-		{Math.round(overall.power.current)}
-		{Math.round(overall.fielding.current)}
-		<span class={`fi fi-${nationality}`} /><br />
-		Position: {baseball_info.positions[position - 1].name} <br />
-		Salary: ${contractPay > 9 ? contractPay / 10 + 'M' : contractPay * 100 + 'k'}
-
-		{#if year < 13}
-			<form on:submit|preventDefault={advanceYear}>
-				<div class="row">
-					<div class="field" data-col="2">
-						<input type="submit" value="Play Year {year}" />
-					</div>
-				</div>
-			</form>
-		{:else if !retired}
-			<form on:submit|preventDefault={endCareer}>
-				<div class="row">
-					<div class="field" data-col="2">
-						<input type="submit" value="Retire" />
-					</div>
-				</div>
-			</form>
-		{:else}
-			<form on:submit|preventDefault={reset}>
-				<div class="row">
-					<div class="field" data-col="2">
-						<input type="submit" value="Reset" />
-					</div>
-				</div>
-			</form>
-		{/if}
+		<span class={`fi fi-${nationality}`} />
 	</div>
 </div>
+<div data-grid="row">
+	<div class="col-11">
+		Position:&nbsp;{baseball_info.positions[position - 1].name}
+	</div>
+</div>
+<div data-grid="row">
+	<div class="col-11">
+		Salary:&nbsp;${contractPay > 9 ? contractPay / 10 + 'M' : contractPay * 100 + 'k'}
+	</div>
+</div>
+
+{#if year < 13}
+	<form on:submit|preventDefault={advanceYear}>
+		<div data-grid="row">
+			<div class="col-11">
+				<input type="submit" value="Play Year {year}" />
+			</div>
+		</div>
+	</form>
+{:else if !retired}
+	<form on:submit|preventDefault={endCareer}>
+		<div data-grid="row">
+			<div class="col-11">
+				<input type="submit" value="Retire" />
+			</div>
+		</div>
+	</form>
+{:else}
+	<form on:submit|preventDefault={reset}>
+		<div data-grid="row">
+			<div class="col-11">
+				<input type="submit" value="Reset" />
+			</div>
+		</div>
+	</form>
+{/if}
