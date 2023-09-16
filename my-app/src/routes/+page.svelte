@@ -51,10 +51,9 @@
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	function handleSubmitStart() {
-		generatePlayer();
-
+	async function handleSubmitStart() {
 		showStartForm = false;
+		await generatePlayer();
 	}
 
 	function handleAdvanceYear() {
@@ -63,14 +62,11 @@
 		if (contractLength == 0 && year <= 12) simulateFreeAgency();
 	}
 
-	function generatePlayer() {
+	async function generatePlayer() {
 		const choseNation = baseball_info.nationalities.find(
 			(nation) => nation.abbreviation === nationality
 		);
 		const chosePosition = baseball_info.positions[position - 1];
-
-		teamNumber = getRandomInt(0, baseball_info.teams.length - 1);
-		teamName = baseball_info.teams[teamNumber].name;
 
 		overall.contact.potential = getRandomInt(25, 90) + choseNation.contact + chosePosition.contact;
 		overall.power.potential = getRandomInt(25, 90) + choseNation.power + chosePosition.power;
@@ -91,6 +87,9 @@
 		);
 
 		overall.development = getRandomInt(1, 10);
+
+		teamNumber = getRandomInt(0, baseball_info.teams.length - 1);
+		teamName = baseball_info.teams[teamNumber].name;
 	}
 
 	function generateYear() {
@@ -106,8 +105,10 @@
 		if (home_runs < 0) home_runs = 0;
 
 		const score = average * 2 + home_runs * 10 + drs * 20;
-		if (score >= 700) allStarAppearances++;
-		if (score >= 1000) mvps++;
+		const isAllStar = score >= 850;
+		const isMVP = score >= 1100;
+		if (isAllStar) allStarAppearances++;
+		if (isMVP) mvps++;
 		lastScore = score;
 
 		const teamScore = score + getRandomInt(20, 60 - baseball_info.teams[teamNumber].rank) * 150;
@@ -119,7 +120,9 @@
 			home_runs,
 			drs,
 			score,
-			teamName
+			teamName,
+			all_star: isAllStar,
+			mvp: isMVP
 		});
 
 		stats = [...stats];
@@ -130,13 +133,33 @@
 
 	function simulateFreeAgency() {
 		offers = [];
+		let salaries = [];
+		if (stats[stats.length - 1].mvp) {
+			salaries.push(
+				getRandomInt(Math.round(12 * (lastScore / 100)), Math.round(10 * (lastScore / 100)) * 2 + 2)
+			);
+			salaries.push(
+				getRandomInt(Math.round(12 * (lastScore / 100)), Math.round(10 * (lastScore / 100)) * 2 + 2)
+			);
+		} else if (stats[stats.length - 1].all_star) {
+			salaries.push(
+				getRandomInt(Math.round(8 * (lastScore / 100)), Math.round(7 * (lastScore / 100)) * 2 + 2)
+			);
+			salaries.push(
+				getRandomInt(Math.round(8 * (lastScore / 100)), Math.round(7 * (lastScore / 100)) * 2 + 2)
+			);
+		} else {
+			salaries.push(
+				getRandomInt(Math.round(5 * (lastScore / 100)), Math.round(5 * (lastScore / 100)) * 2 + 2)
+			);
+			salaries.push(
+				getRandomInt(Math.round(5 * (lastScore / 100)), Math.round(5 * (lastScore / 100)) * 2 + 2)
+			);
+		}
 		//generate offer one
 		offers.push({
 			number: getRandomInt(0, baseball_info.teams.length - 1),
-			salary: getRandomInt(
-				Math.round(7 * (lastScore / 100)) * 2,
-				Math.round(7 * (lastScore / 100)) * 2 + 2
-			),
+			salary: salaries[0],
 			years: getRandomInt(1, 3)
 		});
 		while (offers[0].number == teamNumber) {
@@ -145,10 +168,7 @@
 		//generate offer two
 		offers.push({
 			number: getRandomInt(0, baseball_info.teams.length - 1),
-			salary: getRandomInt(
-				Math.round(7 * (lastScore / 100)),
-				Math.round(7 * (lastScore / 100)) * 2 + 2
-			),
+			salary: salaries[1],
 			years: getRandomInt(1, 3)
 		});
 		while (offers[1].number == teamNumber || offers[0].number == offers[1].number) {
@@ -186,7 +206,7 @@
 	}
 
 	function updateTeam(number) {
-		if (teamNumber) {
+		if (teamNumber != null) {
 			teamName = baseball_info.teams[number].name;
 			teamNumber = number;
 		}
@@ -202,52 +222,52 @@
 </script>
 
 <div data-grid>
-	<div data-grid="row">
-		<div class-grid="col" class="col-offset-0">
-			<div class="col-11">
-				<h1>Welcome to My MLB Career</h1>
-			</div>
+	<div data-grid="row va-center">
+		<div class="col-12 align-center">
+			<h1>Welcome to My MLB Career</h1>
 		</div>
 	</div>
 
 	{#if showStartForm}
-		<div data-grid="row">
-			<div class-grid="col" class="col-offset-0">
-				<form class="form" on:submit|preventDefault={handleSubmitStart}>
-					<div data-grid="row">
-						<div class="field" data-col="2">
-							<label for="nationalities">Nation</label>
-							<select name="nationalities" id="nationalities" bind:value={nationality}>
-								{#each baseball_info.nationalities as nation}
-									<option value={nation.abbreviation}>{nation.name}</option>
-								{/each}
-							</select>
-						</div>
-						<div class="field" data-col="2">
-							<label for="positions">Position</label><br />
-							<select name="positions" id="positions" bind:value={position}>
-								{#each baseball_info.positions as position}
-									{#if position.name != 'P'}
-										<option value={position.number}>{position.name}</option>
-									{/if}
-								{/each}
-							</select>
-						</div>
-					</div>
-
-					<div data-grid="row">
-						<div class="col-5">
-							<input type="submit" />
-						</div>
-					</div>
-				</form>
+		<!-- <div data-grid="row va-center">
+			<div class="col-12 align-center"> -->
+		<form class="form col-12" on:submit|preventDefault={handleSubmitStart}>
+			<div class="row">
+				<div class="col-3" />
+				<div class="field col-3 align-left">
+					<label for="nationalities">Nation</label>
+					<select name="nationalities" id="nationalities" bind:value={nationality}>
+						{#each baseball_info.nationalities as nation}
+							<option value={nation.abbreviation}>{nation.name}</option>
+						{/each}
+					</select>
+				</div>
+				<div class="field col-3 align-left">
+					<label for="positions">Position</label>
+					<select name="positions" id="positions" bind:value={position}>
+						{#each baseball_info.positions as position}
+							{#if position.name != 'P'}
+								<option value={position.number}>{position.name}</option>
+							{/if}
+						{/each}
+					</select>
+				</div>
+				<div class="col-3" />
 			</div>
-		</div>
+
+			<div class="row va-center">
+				<div class="col-12 align-center">
+					<input type="submit" />
+				</div>
+			</div>
+		</form>
+		<!-- </div>
+		</div> -->
 	{/if}
 
 	{#if !showStartForm}
-		<div data-grid="row">
-			<div class-grid="col" class="col-offset-0">
+		<div data-grid="row va-center">
+			<div class="col-12 align-center">
 				<GameForm
 					{teamName}
 					{overall}

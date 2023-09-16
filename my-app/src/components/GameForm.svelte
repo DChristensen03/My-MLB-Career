@@ -41,12 +41,12 @@
 </script>
 
 <div data-grid="row">
-	<div class="col-11">
+	<div class="col-12">
 		Team: {teamName}
 	</div>
 </div>
 <div data-grid="row">
-	<div class="col-11">
+	<div class="col-12">
 		Overall:
 		<span style="color:{avgOverall > lastAvg ? 'green' : avgOverall == lastAvg ? '' : 'red'};">
 			{avgOverall}
@@ -55,12 +55,12 @@
 	</div>
 </div>
 <div data-grid="row">
-	<div class="col-11">
+	<div class="col-12">
 		Position:&nbsp;{baseball_info.positions[position - 1].name}
 	</div>
 </div>
 <div data-grid="row">
-	<div class="col-11">
+	<div class="col-12">
 		Salary:&nbsp;${contractPay > 9 ? contractPay / 10 + 'M' : contractPay * 100 + 'k'}
 	</div>
 </div>
@@ -68,7 +68,7 @@
 {#if year < 13}
 	<form on:submit|preventDefault={advanceYear}>
 		<div data-grid="row">
-			<div class="col-11">
+			<div class="col-12">
 				<input type="submit" value="Play Year {year}" />
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 {:else if !retired}
 	<form on:submit|preventDefault={endCareer}>
 		<div data-grid="row">
-			<div class="col-11">
+			<div class="col-12">
 				<input type="submit" value="Retire" />
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 {:else}
 	<form on:submit|preventDefault={reset}>
 		<div data-grid="row">
-			<div class="col-11">
+			<div class="col-12">
 				<input type="submit" value="Reset" />
 			</div>
 		</div>

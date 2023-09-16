@@ -4,7 +4,7 @@
 
 <div data-grid="row">
 	<div class="col-6">
-		<table data-table="responsive striped">
+		<table data-table="responsive striped" class="visible-small">
 			<tr>
 				<th />
 				<th>AVG</th>
