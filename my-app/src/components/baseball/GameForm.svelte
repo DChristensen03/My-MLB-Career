@@ -1,10 +1,23 @@
 <script>
-	import baseball_info from '../info/baseball_info.json';
+	import baseball_info from '../../info/baseball_info.json';
 	import { createEventDispatcher } from 'svelte';
+	import EndOfCareer from './EndOfCareer.svelte';
 
 	const dispatch = createEventDispatcher();
 
-	export let teamName, overall, lastOverall, nationality, year, position, retired, contractPay;
+	export let teamName,
+		overall,
+		lastOverall,
+		nationality,
+		year,
+		position,
+		retired,
+		contractPay,
+		mvps,
+		allStarAppearances,
+		worldSeries,
+		totalSalary,
+		stats;
 
 	let avgOverall, lastAvg;
 
@@ -33,10 +46,6 @@
 		dispatch('message', {
 			text: 'endCareer'
 		});
-	}
-
-	function reset() {
-		window.location.reload();
 	}
 </script>
 
@@ -82,11 +91,5 @@
 		</div>
 	</form>
 {:else}
-	<form on:submit|preventDefault={reset}>
-		<div data-grid="row">
-			<div class="col-12">
-				<input type="submit" value="Reset" />
-			</div>
-		</div>
-	</form>
+	<EndOfCareer {stats} {mvps} {allStarAppearances} {totalSalary} />
 {/if}

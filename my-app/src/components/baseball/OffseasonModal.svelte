@@ -1,6 +1,6 @@
 <script>
-	import Modal from './Modal.svelte';
-	import baseball_info from '../info/baseball_info.json';
+	import Modal from '../Modal.svelte';
+	import baseball_info from '../../info/baseball_info.json';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
