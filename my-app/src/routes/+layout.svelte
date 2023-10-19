@@ -1,6 +1,22 @@
-<head>
-	<link rel="stylesheet" href="/style.scss" type="text/css" />
-</head>
+<script>
+	import { onMount } from 'svelte';
+
+	onMount(async () => {
+		if (localStorage.getItem('userid') === null) {
+			const response = await fetch('/home', {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				}
+			});
+
+			let userid = await response.json();
+			userid = userid.insert_users_one.userid;
+
+			localStorage.setItem('userid', userid);
+		}
+	});
+</script>
 
 <div class="navbar">
 	<a href="/">Home</a>
