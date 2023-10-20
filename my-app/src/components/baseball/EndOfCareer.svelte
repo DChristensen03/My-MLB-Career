@@ -5,10 +5,11 @@
 		worldSeries,
 		totalSalary;
 
-	let name = '',
+	let name = localStorage.getItem('name'),
 		loading = false;
 
 	async function reset() {
+		localStorage.setItem('name', name);
 		loading = true;
 		await fetch('/baseball/game/checkStats', {
 			method: 'POST',

@@ -31,6 +31,7 @@
 			<a href="/baseball/tutorial">Tutorial</a>
 		</div>
 	</div>
+	<a href="/info">Info</a>
 </div>
 
 <div style="padding: 4rem;">
