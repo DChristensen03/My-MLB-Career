@@ -49,7 +49,7 @@
 		<div class="field col-1">
 			<label for="amount">Show Stats</label>
 			<select name="amount" id="amount" bind:value={amount}>
-				<option value="5">5</option>
+				<option selected value="5">5</option>
 				<option value="10">10</option>
 				<option value="15">15</option>
 				<option value="20">20</option>
