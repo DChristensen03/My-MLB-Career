@@ -1,16 +1,16 @@
 <script>
-	import { onMount } from 'svelte';
-
 	export let stats = {},
 		mvps,
 		allStarAppearances,
 		worldSeries,
 		totalSalary;
 
-	let name = '';
+	let name = '',
+		loading = false;
 
 	async function reset() {
-		const response = await fetch('/baseball/game/checkStats', {
+		loading = true;
+		await fetch('/baseball/game/checkStats', {
 			method: 'POST',
 			body: JSON.stringify({
 				mvps,
@@ -26,6 +26,7 @@
 			}
 		});
 
+		loading = false;
 		window.location.reload();
 	}
 </script>
@@ -39,7 +40,22 @@
 	</div>
 	<div data-grid="row">
 		<div class="col-12">
-			<input class="red" type="submit" value="Reset" disabled={name === ''} />
+			<input
+				class="red {loading ? 'loading' : ''}"
+				type="submit"
+				value="Reset"
+				disabled={name === '' || loading}
+			/>
 		</div>
 	</div>
 </form>
+
+<style>
+	.loading {
+		background-color: #ffffff;
+		background-image: url('https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif');
+		background-size: 15px 15px;
+		background-position: right center;
+		background-repeat: no-repeat;
+	}
+</style>
