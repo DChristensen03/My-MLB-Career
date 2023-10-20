@@ -3,6 +3,7 @@ import { json } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
+  console.log(process.env.CLIENT_ADDRESS, process.env.ADMIN_SECRET)
   const client = new GraphQLClient(process.env.CLIENT_ADDRESS, {
     headers: {
       "x-hasura-admin-secret": process.env.ADMIN_SECRET,
