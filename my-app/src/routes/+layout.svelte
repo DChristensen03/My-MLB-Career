@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { ToastContainer, FlatToast } from 'svelte-toasts';
 
 	onMount(async () => {
 		if (localStorage.getItem('userid') === null) {
@@ -33,6 +34,10 @@
 	</div>
 	<a href="/info">Info</a>
 </div>
+
+<ToastContainer duration="5000" showProgress="true" theme="dark" placement="top-right" let:data>
+	<FlatToast {data} />
+</ToastContainer>
 
 <div style="padding: 4rem;">
 	<slot />

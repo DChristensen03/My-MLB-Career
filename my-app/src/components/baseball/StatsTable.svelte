@@ -2,9 +2,9 @@
 	export let stats = [];
 </script>
 
-<div data-grid="row">
-	<div class="col-6">
-		<table data-table="responsive striped" class="visible-small">
+<div class="col-6">
+	<table data-table="responsive striped">
+		<thead>
 			<tr>
 				<th />
 				<th>AVG</th>
@@ -12,6 +12,8 @@
 				<th>DRS</th>
 				<th>Team</th>
 			</tr>
+		</thead>
+		<tbody>
 			{#each stats as stat, i}
 				{#if i < 6}
 					<tr>
@@ -23,11 +25,13 @@
 					</tr>
 				{/if}
 			{/each}
-		</table>
-	</div>
-	<div class="col-6">
-		<table data-table="responsive striped">
-			{#if stats.length >= 7}
+		</tbody>
+	</table>
+</div>
+<div class="col-6">
+	<table data-table="striped responsive">
+		{#if stats.length >= 7}
+			<thead>
 				<tr>
 					<th />
 					<th>AVG</th>
@@ -35,6 +39,8 @@
 					<th>DRS</th>
 					<th>Team</th>
 				</tr>
+			</thead>
+			<tbody>
 				{#each stats as stat, i}
 					{#if i >= 6}
 						<tr>
@@ -46,7 +52,30 @@
 						</tr>
 					{/if}
 				{/each}
-			{/if}
-		</table>
-	</div>
+			</tbody>
+		{/if}
+	</table>
 </div>
+
+<style>
+	@media (max-width: 720px) {
+		table {
+			display: block;
+			width: 100%;
+			overflow-x: auto;
+		}
+
+		table th,
+		table td {
+			display: table-cell;
+		}
+
+		table thead {
+			display: table-header-group;
+		}
+
+		table tbody {
+			display: table-row-group;
+		}
+	}
+</style>

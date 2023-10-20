@@ -162,3 +162,26 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@media (max-width: 720px) {
+		table {
+			display: block;
+			width: 100%;
+			overflow-x: auto;
+		}
+
+		table th,
+		table td {
+			display: table-cell;
+		}
+
+		table thead {
+			display: table-header-group;
+		}
+
+		table tbody {
+			display: table-row-group;
+		}
+	}
+</style>

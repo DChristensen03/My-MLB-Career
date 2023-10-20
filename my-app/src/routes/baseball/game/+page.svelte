@@ -226,7 +226,7 @@
 	}
 </script>
 
-<div data-grid>
+<div style="position: relative;">
 	<div data-grid="row va-center">
 		<div class="col-12 align-center">
 			<h1>Welcome to My MLB Career</h1>
@@ -296,18 +296,12 @@
 
 	{#if stats.length > 0}
 		<div data-grid="row">
-			<div class-grid="col" class="col-offset-0">
-				<StatsTable {stats} />
-			</div>
+			<StatsTable {stats} />
 		</div>
 	{/if}
 
 	{#if retired}
-		<div data-grid="row">
-			<div class-grid="col" class="col-offset-0">
-				<RetireTable {stats} {allStarAppearances} {mvps} {worldSeries} {totalSalary} />
-			</div>
-		</div>
+		<RetireTable {stats} {allStarAppearances} {mvps} {worldSeries} {totalSalary} />
 	{/if}
 
 	<OffseasonModal

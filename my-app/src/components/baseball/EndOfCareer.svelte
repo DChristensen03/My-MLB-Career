@@ -42,7 +42,7 @@
 	<div data-grid="row">
 		<div class="col-12">
 			<input
-				class="red {loading ? 'loading' : ''}"
+				class="align-center {loading ? 'loading' : ''}"
 				type="submit"
 				value="Reset"
 				disabled={name === '' || loading}

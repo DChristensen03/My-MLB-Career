@@ -25,6 +25,7 @@
 		"flag-icons": "^6.11.0",
 		"graphql": "^16.8.1",
 		"graphql-request": "^6.1.0",
+		"svelte-toasts": "^1.1.2",
 		"uuid": "^9.0.1",
 		"wire.css": "^1.2.5"
 	}

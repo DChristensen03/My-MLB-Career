@@ -34,38 +34,69 @@
 <div data-grid="row center-center">
 	<div class="col-4">
 		<table data-table="responsive striped">
-			<tr>
-				<th>All-Stars</th>
-				<th>MVPs</th>
-				<th>World Series</th>
-				<th>Career Earnings</th>
-				<th>Hall of Fame</th>
-			</tr>
-			<tr>
-				<th>{allStarAppearances}</th>
-				<th>{mvps}</th>
-				<th>{worldSeries}</th>
-				<th>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</th>
-				{#if allStarAppearances + mvps * 4 >= 15}
-					<th>✓</th>
-				{:else}
-					<th>✗</th>
-				{/if}
-			</tr>
+			<thead>
+				<tr>
+					<th>All-Stars</th>
+					<th>MVPs</th>
+					<th>World Series</th>
+					<th>Career Earnings</th>
+					<th>Hall of Fame</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>{allStarAppearances}</th>
+					<th>{mvps}</th>
+					<th>{worldSeries}</th>
+					<th>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</th>
+					{#if allStarAppearances + mvps * 4 >= 15}
+						<th>✓</th>
+					{:else}
+						<th>✗</th>
+					{/if}
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<div class="col-4">
 		<table data-table="responsive striped">
-			<tr>
-				<th>Career Average</th>
-				<th>Home Runs</th>
-				<th>Defensive Runs Saved</th>
-			</tr>
-			<tr>
-				<th>.{getCareerAverage()}</th>
-				<th>{getCareerHomeRuns()}</th>
-				<th>{getCareerDRS()}</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>Career Average</th>
+					<th>Home Runs</th>
+					<th>Defensive Runs Saved</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>.{getCareerAverage()}</th>
+					<th>{getCareerHomeRuns()}</th>
+					<th>{getCareerDRS()}</th>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </div>
+
+<style>
+	@media (max-width: 720px) {
+		table {
+			display: block;
+			width: 100%;
+			overflow-x: auto;
+		}
+
+		table th,
+		table td {
+			display: table-cell;
+		}
+
+		table thead {
+			display: table-header-group;
+		}
+
+		table tbody {
+			display: table-row-group;
+		}
+	}
+</style>
