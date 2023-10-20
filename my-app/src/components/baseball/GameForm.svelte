@@ -91,5 +91,5 @@
 		</div>
 	</form>
 {:else}
-	<EndOfCareer {stats} {mvps} {allStarAppearances} {totalSalary} />
+	<EndOfCareer {stats} {mvps} {allStarAppearances} {totalSalary} {worldSeries} />
 {/if}

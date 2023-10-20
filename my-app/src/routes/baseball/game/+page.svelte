@@ -282,6 +282,10 @@
 					{position}
 					{retired}
 					{contractPay}
+					{stats}
+					{worldSeries}
+					{totalSalary}
+					{mvps}
 					on:message={handleMessage}
 				/>
 			</div>

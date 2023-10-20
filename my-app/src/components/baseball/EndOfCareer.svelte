@@ -9,40 +9,29 @@
 
 	let name = '';
 
-	onMount(() => {
+	onMount(async () => {
 		console.log('end of career');
-		checkHOFStats();
 	});
 
-	function checkHOFStats() {
-		const mvpRecord = checkMVPs(mvps);
-		console.log(mvpRecord);
-		// array.push({ name, num });
-		// 	localStorage.setItem('MVPs', JSON.stringify(array));
-	}
-
-	function checkMVPs(num) {
-		const MVPs = localStorage.getItem('careerMVPS');
-		let array = JSON.parse(MVPs);
-		if (num > 0) {
-			if (!array) {
-				return true;
-			} else if (array.length < 5) {
-				return true;
+	async function reset() {
+		const response = await fetch('/baseball/game/checkStats', {
+			method: 'POST',
+			body: JSON.stringify({
+				mvps,
+				allStarAppearances,
+				worldSeries,
+				totalSalary,
+				stats,
+				userid: localStorage.getItem('userid'),
+				name
+			}),
+			headers: {
+				'content-type': 'application/json'
 			}
-		}
+		});
 
-		if (array) {
-			array = array.sort(function (a, b) {
-				return parseInt(a.num) - parseInt(b.num);
-			});
-			if (num > array.slice(-1).num) return true;
-		}
+		console.log(await response.json());
 
-		return false;
-	}
-
-	function reset() {
 		window.location.reload();
 	}
 </script>
@@ -50,7 +39,13 @@
 <form on:submit|preventDefault={reset}>
 	<div data-grid="row">
 		<div class="col-12">
-			<input class="red" type="submit" value="Reset" />
+			<label for="name">Name: </label>
+			<input name="name" id="name" type="text" bind:value={name} />
+		</div>
+	</div>
+	<div data-grid="row">
+		<div class="col-12">
+			<input class="red" type="submit" value="Reset" disabled={name === ''} />
 		</div>
 	</div>
 </form>
