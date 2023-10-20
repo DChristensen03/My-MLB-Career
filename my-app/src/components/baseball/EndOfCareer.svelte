@@ -19,7 +19,7 @@
 				totalSalary,
 				stats,
 				userid: localStorage.getItem('userid'),
-				name
+				name: name.substring(0, 25)
 			}),
 			headers: {
 				'content-type': 'application/json'
@@ -35,7 +35,7 @@
 	<div data-grid="row">
 		<div class="col-12">
 			<label for="name">Name: </label>
-			<input name="name" id="name" type="text" maxlength="10" bind:value={name} />
+			<input name="name" id="name" type="text" maxlength="25" bind:value={name} />
 		</div>
 	</div>
 	<div data-grid="row">
