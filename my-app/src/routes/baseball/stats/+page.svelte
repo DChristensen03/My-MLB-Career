@@ -7,15 +7,17 @@
 		homeRuns = [],
 		drs = [];
 
-	let show_stats = 'personal';
+	let show_stats = 'personal',
+		amount = 5;
 
-	$: show_stats, updateStats();
+	$: show_stats, amount, updateStats();
 
 	async function updateStats() {
 		const response = await fetch(`/baseball/stats/${show_stats}`, {
 			method: 'POST',
 			body: JSON.stringify({
-				userid: localStorage.getItem('userid')
+				userid: localStorage.getItem('userid'),
+				amount
 			}),
 			headers: {
 				'content-type': 'application/json'
@@ -43,6 +45,18 @@
 			<option value="global">Global</option>
 		</select>
 	</div>
+	{#if show_stats == 'global'}
+		<div class="field col-1">
+			<label for="amount">Show Stats</label>
+			<select name="amount" id="amount" bind:value={amount}>
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="25">25</option>
+			</select>
+		</div>
+	{/if}
 </div>
 
 <div>
