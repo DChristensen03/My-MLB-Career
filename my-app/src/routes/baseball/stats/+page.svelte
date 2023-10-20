@@ -7,8 +7,12 @@
 		homeRuns = [],
 		drs = [];
 
-	onMount(async () => {
-		const response = await fetch('/baseball/stats', {
+	let show_stats = 'personal';
+
+	$: show_stats, updateStats();
+
+	async function updateStats() {
+		const response = await fetch(`/baseball/stats/${show_stats}`, {
 			method: 'POST',
 			body: JSON.stringify({
 				userid: localStorage.getItem('userid')
@@ -24,8 +28,22 @@
 		averages = stats.baseball_career_average;
 		homeRuns = stats.baseball_career_home_runs;
 		drs = stats.baseball_career_defensive_runs_saved;
+	}
+
+	onMount(async () => {
+		updateStats();
 	});
 </script>
+
+<div data-grid="row center-center">
+	<div class="field col-3">
+		<label for="show_stats">Show Stats</label>
+		<select name="show_stats" id="show_stats" bind:value={show_stats}>
+			<option value="personal">Personal</option>
+			<option value="global">Global</option>
+		</select>
+	</div>
+</div>
 
 <div>
 	<div data-grid="ca-space-around center-center">
