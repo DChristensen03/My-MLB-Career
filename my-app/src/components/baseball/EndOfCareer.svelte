@@ -9,10 +9,6 @@
 
 	let name = '';
 
-	onMount(async () => {
-		console.log('end of career');
-	});
-
 	async function reset() {
 		const response = await fetch('/baseball/game/checkStats', {
 			method: 'POST',
@@ -30,9 +26,7 @@
 			}
 		});
 
-		console.log(await response.json());
-
-		window.location.reload();
+		//window.location.reload();
 	}
 </script>
 
