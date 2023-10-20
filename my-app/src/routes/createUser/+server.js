@@ -4,9 +4,9 @@ import { json } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
-  const client = new GraphQLClient('https://ultimate-fowl-18.hasura.app/v1/graphql', {
+  const client = new GraphQLClient(process.env.CLIENT_ADDRESS, {
     headers: {
-      "x-hasura-admin-secret": `fHQMrp2RIy2SqmlbJx6AfOVyytwNqd2wyhlp3xqM59LDqZiLNIlEZ6LUkbCMODyQ`,
+      "x-hasura-admin-secret": process.env.ADMIN_SECRET,
     },
   })
   const userid = uuid();
