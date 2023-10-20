@@ -9,9 +9,8 @@ export async function POST({ request }) {
     },
   })
   request = await request.json();
-  const userid = request.userid;
 
-  const data = await client.request(gql`query MyQuery($userid: uuid!) {
+  const data = await client.request(gql`query {
         baseball_career_average(limit: 5, order_by: {average: desc}) {
           average
           name
@@ -36,8 +35,7 @@ export async function POST({ request }) {
           total
           name
         }
-      }
-      `, { userid: userid })
+      }`)
 
   return json(data);
 }
