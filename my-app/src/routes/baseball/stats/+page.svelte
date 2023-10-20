@@ -8,7 +8,7 @@
 		drs = [];
 
 	let show_stats = 'personal',
-		amount = 5;
+		amount = '5';
 
 	$: show_stats, amount, updateStats();
 
