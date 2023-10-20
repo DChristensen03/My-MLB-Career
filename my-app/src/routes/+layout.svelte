@@ -3,7 +3,7 @@
 
 	onMount(async () => {
 		if (localStorage.getItem('userid') === null) {
-			const response = await fetch('/home', {
+			const response = await fetch('/createUser', {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json'
