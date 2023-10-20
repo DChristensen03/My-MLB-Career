@@ -27,104 +27,106 @@
 	});
 </script>
 
-<div data-grid="row center-center">
-	<div class="col-3">
-		<table data-table="responsive striped">
-			<tr>
-				<th />
-				<th>Name</th>
-				<th>MVPs</th>
-			</tr>
-			{#each mvps as stat, i}
+<div>
+	<div data-grid="ca-space-around center-center">
+		<div class="col-4">
+			<table data-table="responsive striped">
 				<tr>
-					<th>{i + 1}</th>
-					<th>{stat.name}</th>
-					<th>{stat.total}</th>
+					<th />
+					<th>Name</th>
+					<th>MVPs</th>
 				</tr>
-			{/each}
-		</table>
-	</div>
-	<div class="col-3">
-		<table data-table="responsive striped">
-			<tr>
-				<th />
-				<th>Name</th>
-				<th>Salary</th>
-			</tr>
-			{#each salaries as stat, i}
+				{#each mvps as stat, i}
+					<tr>
+						<th>{i + 1}</th>
+						<th>{stat.name}</th>
+						<th>{stat.total}</th>
+					</tr>
+				{/each}
+			</table>
+		</div>
+		<div class="col-4">
+			<table data-table="responsive striped">
 				<tr>
-					<th>{i + 1}</th>
-					<th>{stat.name}</th>
-					<th>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</th>
+					<th />
+					<th>Name</th>
+					<th>Salary</th>
 				</tr>
-			{/each}
-		</table>
-	</div>
-	<div class="col-3">
-		<table data-table="responsive striped">
-			<tr>
-				<th />
-				<th>Name</th>
-				<th>World Series</th>
-			</tr>
-			{#each worldSeries as stat, i}
+				{#each salaries as stat, i}
+					<tr>
+						<th>{i + 1}</th>
+						<th>{stat.name}</th>
+						<th>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</th>
+					</tr>
+				{/each}
+			</table>
+		</div>
+		<div class="col-4">
+			<table data-table="responsive striped">
 				<tr>
-					<th>{i + 1}</th>
-					<th>{stat.name}</th>
-					<th>{stat.total}</th>
+					<th />
+					<th>Name</th>
+					<th>World Series</th>
 				</tr>
-			{/each}
-		</table>
+				{#each worldSeries as stat, i}
+					<tr>
+						<th>{i + 1}</th>
+						<th>{stat.name}</th>
+						<th>{stat.total}</th>
+					</tr>
+				{/each}
+			</table>
+		</div>
 	</div>
-</div>
 
-<div data-grid="row center-center">
-	<div class="col-3">
-		<table data-table="responsive striped">
-			<tr>
-				<th />
-				<th>Name</th>
-				<th>Average</th>
-			</tr>
-			{#each averages as stat, i}
+	<div data-grid="ca-space-around center-center">
+		<div class="col-4">
+			<table data-table="responsive striped">
 				<tr>
-					<th>{i + 1}</th>
-					<th>{stat.name}</th>
-					<th>.{stat.average}</th>
+					<th />
+					<th>Name</th>
+					<th>Average</th>
 				</tr>
-			{/each}
-		</table>
-	</div>
-	<div class="col-3">
-		<table data-table="responsive striped">
-			<tr>
-				<th />
-				<th>Name</th>
-				<th>Home Runs</th>
-			</tr>
-			{#each homeRuns as stat, i}
+				{#each averages as stat, i}
+					<tr>
+						<th>{i + 1}</th>
+						<th>{stat.name}</th>
+						<th>.{stat.average}</th>
+					</tr>
+				{/each}
+			</table>
+		</div>
+		<div class="col-4">
+			<table data-table="responsive striped">
 				<tr>
-					<th>{i + 1}</th>
-					<th>{stat.name}</th>
-					<th>{stat.total}</th>
+					<th />
+					<th>Name</th>
+					<th>Home Runs</th>
 				</tr>
-			{/each}
-		</table>
-	</div>
-	<div class="col-3">
-		<table data-table="responsive striped">
-			<tr>
-				<th />
-				<th>Name</th>
-				<th>DRS</th>
-			</tr>
-			{#each drs as stat, i}
+				{#each homeRuns as stat, i}
+					<tr>
+						<th>{i + 1}</th>
+						<th>{stat.name}</th>
+						<th>{stat.total}</th>
+					</tr>
+				{/each}
+			</table>
+		</div>
+		<div class="col-4">
+			<table data-table="responsive striped">
 				<tr>
-					<th>{i + 1}</th>
-					<th>{stat.name}</th>
-					<th>{stat.total}</th>
+					<th />
+					<th>Name</th>
+					<th>DRS</th>
 				</tr>
-			{/each}
-		</table>
+				{#each drs as stat, i}
+					<tr>
+						<th>{i + 1}</th>
+						<th>{stat.name}</th>
+						<th>{stat.total}</th>
+					</tr>
+				{/each}
+			</table>
+		</div>
 	</div>
 </div>

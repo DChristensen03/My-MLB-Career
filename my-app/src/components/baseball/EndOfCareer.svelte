@@ -35,7 +35,7 @@
 	<div data-grid="row">
 		<div class="col-12">
 			<label for="name">Name: </label>
-			<input name="name" id="name" type="text" bind:value={name} />
+			<input name="name" id="name" type="text" maxlength="10" bind:value={name} />
 		</div>
 	</div>
 	<div data-grid="row">
