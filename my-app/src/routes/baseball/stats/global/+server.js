@@ -9,29 +9,30 @@ export async function POST({ request }) {
     },
   })
   request = await request.json();
+  const amount = request.amount;
 
   const data = await client.request(gql`query {
-        baseball_career_average(limit: 5, order_by: {average: desc}) {
+        baseball_career_average(limit: ${amount}, order_by: {average: desc}) {
           average
           name
         }
-        baseball_career_home_runs(limit: 5, order_by: {total: desc}) {
+        baseball_career_home_runs(limit: ${amount}, order_by: {total: desc}) {
           total
           name
         }
-        baseball_career_mvps(limit: 5, order_by: {total: desc}) {
+        baseball_career_mvps(limit: ${amount}, order_by: {total: desc}) {
           total
           name
         }
-        baseball_career_salary(limit: 5, order_by: {total: desc}) {
+        baseball_career_salary(limit: ${amount}, order_by: {total: desc}) {
           total
           name
         }
-        baseball_career_world_series(limit: 5, order_by: {total: desc}) {
+        baseball_career_world_series(limit: ${amount}, order_by: {total: desc}) {
           total
           name
         }
-        baseball_career_defensive_runs_saved(limit: 5, order_by: {total: desc}) {
+        baseball_career_defensive_runs_saved(limit: ${amount}, order_by: {total: desc}) {
           total
           name
         }
