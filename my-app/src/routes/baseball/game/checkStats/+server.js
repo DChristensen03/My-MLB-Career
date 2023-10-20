@@ -51,9 +51,8 @@ export async function POST({ request }) {
   average = Math.round(average / 12);
 
 
-  console.log()
   //average
-  if (data.baseball_career_average.length === 0 || average > data.baseball_career_average[0].average) {
+  if (data.baseball_career_average.length < 5 || average > data.baseball_career_average[0].average) {
     // Write career average to the db
     if (data.baseball_career_average.length === 5) {
       await client.request(gql`mutation RemoveAverage($id: Int!) {
