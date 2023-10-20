@@ -71,7 +71,7 @@ export async function POST({ request }) {
           `, { userid: userid, name: request.name, average });
   }
   //drs
-  if (data.baseball_career_defensive_runs_saved.length < 5 || drs > data.baseball_career_defensive_runs_saved[0].average) {
+  if (data.baseball_career_defensive_runs_saved.length < 5 || drs > data.baseball_career_defensive_runs_saved[0].total) {
     // Write career drs to the db
     if (data.baseball_career_defensive_runs_saved.length === 5) {
       await client.request(gql`mutation RemoveDRS($id: Int!) {
@@ -90,7 +90,7 @@ export async function POST({ request }) {
           `, { userid: userid, name: request.name, total: drs });
   }
   //home_runs
-  if (data.baseball_career_home_runs.length < 5 || home_runs > data.baseball_career_home_runs[0].average) {
+  if (data.baseball_career_home_runs.length < 5 || home_runs > data.baseball_career_home_runs[0].total) {
     // Write career home runs to the db
     if (data.baseball_career_home_runs.length === 5) {
       await client.request(gql`mutation RemoveAverage($id: Int!) {
@@ -109,7 +109,7 @@ export async function POST({ request }) {
           `, { userid: userid, name: request.name, total: home_runs });
   }
   //mvps
-  if (data.baseball_career_mvps.length < 5 || request.mvps > data.baseball_career_mvps[0].average) {
+  if (data.baseball_career_mvps.length < 5 || request.mvps > data.baseball_career_mvps[0].total) {
     // Write career mvps to the db
     if (data.baseball_career_mvps.length === 5) {
       await client.request(gql`mutation RemoveMVPS($id: Int!) {
@@ -128,7 +128,7 @@ export async function POST({ request }) {
           `, { userid: userid, name: request.name, total: request.mvps ? request.mvps : 0 });
   }
   //careerSalary
-  if (data.baseball_career_salary.length < 5 || request.totalSalary > data.baseball_career_salary[0].average) {
+  if (data.baseball_career_salary.length < 5 || request.totalSalary > data.baseball_career_salary[0].total) {
     // Write career salary to the db
     if (data.baseball_career_salary.length === 5) {
       await client.request(gql`mutation RemoveSalary($id: Int!) {
@@ -147,7 +147,7 @@ export async function POST({ request }) {
           `, { userid: userid, name: request.name, total: request.totalSalary });
   }
   //world_series
-  if (data.baseball_career_world_series.length < 5 || request.totalSalary > data.baseball_career_world_series[0].average) {
+  if (data.baseball_career_world_series.length < 5 || request.totalSalary > data.baseball_career_world_series[0].total) {
     // Write career world series to the db
     if (data.baseball_career_world_series.length === 5) {
       await client.request(gql`mutation RemoveWorldSeries($id: Int!) {
