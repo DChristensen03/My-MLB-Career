@@ -115,7 +115,7 @@
 		if (teamScore > 7000) worldSeries++;
 
 		stats.push({
-			year: year + new Date().getFullYear(),
+			year: year + new Date().getFullYear() - 1,
 			average,
 			home_runs,
 			drs,
