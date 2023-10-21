@@ -42,7 +42,7 @@
 	<div data-grid="row">
 		<div class="col-12">
 			<input
-				class="align-center {loading ? 'loading' : ''}"
+				class="align-center cta-button {loading ? 'loading' : ''}"
 				type="submit"
 				value="Reset"
 				disabled={name === '' || loading}
@@ -58,5 +58,22 @@
 		background-size: 15px 15px;
 		background-position: right center;
 		background-repeat: no-repeat;
+	}
+
+	.cta-button {
+		display: inline-block;
+		background-color: #ff5722;
+		color: #fff;
+		text-align: center;
+		padding: 15px 30px;
+		margin-top: 20px;
+		text-decoration: none;
+		border-radius: 5px;
+		font-size: 20px;
+		transition: background-color 0.3s;
+	}
+
+	.cta-button:hover {
+		background-color: #e64a19;
 	}
 </style>

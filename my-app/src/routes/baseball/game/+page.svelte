@@ -262,7 +262,7 @@
 
 			<div class="row va-center">
 				<div class="col-12 align-center">
-					<input type="submit" />
+					<input class="cta-button" type="submit" />
 				</div>
 			</div>
 		</form>
@@ -313,3 +313,22 @@
 		on:message={handleMessage}
 	/>
 </div>
+
+<style>
+	.cta-button {
+		display: inline-block;
+		background-color: #ff5722;
+		color: #fff;
+		text-align: center;
+		padding: 15px 30px;
+		margin-top: 20px;
+		text-decoration: none;
+		border-radius: 5px;
+		font-size: 20px;
+		transition: background-color 0.3s;
+	}
+
+	.cta-button:hover {
+		background-color: #e64a19;
+	}
+</style>
