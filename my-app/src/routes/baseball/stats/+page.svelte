@@ -1,6 +1,17 @@
 <script>
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import {
+		Input,
+		Label,
+		Select,
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
 
 	let mvps = [],
 		salaries = [],
@@ -10,7 +21,7 @@
 		drs = [];
 
 	let show_stats = 'personal',
-		amount = '5';
+		amount = 5;
 
 	$: show_stats, amount, updateStats();
 
@@ -41,151 +52,151 @@
 	});
 </script>
 
-<div data-grid="row center-center">
-	<div class="field col-3">
-		<label for="show_stats">Show Stats</label>
-		<select name="show_stats" id="show_stats" bind:value={show_stats}>
-			<option value="personal">Personal</option>
-			<option value="global">Global</option>
-		</select>
+<div class="flex flex-row justify-center gap-1">
+	<div>
+		<Label>
+			Show Stats
+			<Select
+				items={[
+					{ value: 'personal', name: 'Personal' },
+					{ value: 'global', name: 'Global' }
+				]}
+				placeholder=""
+				size="sm"
+				bind:value={show_stats}
+			/>
+		</Label>
 	</div>
 	{#if show_stats == 'global'}
-		<div class="field col-1">
-			<label for="amount">Show Stats</label>
-			<select name="amount" id="amount" bind:value={amount}>
-				<option selected value="5">5</option>
-				<option value="10">10</option>
-				<option value="15">15</option>
-				<option value="20">20</option>
-				<option value="25">25</option>
-			</select>
+		<div>
+			<Label>
+				Amount
+				<Select
+					items={[
+						{ value: 5, name: '5' },
+						{ value: 10, name: '10' },
+						{ value: 15, name: '15' },
+						{ value: 20, name: '20' },
+						{ value: 25, name: '25' }
+					]}
+					placeholder=""
+					size="sm"
+					bind:value={amount}
+				/>
+			</Label>
 		</div>
 	{/if}
 </div>
-
-<div>
-	<div data-grid="ca-space-around center-center">
-		<div class="col-4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>Name</th>
-					<th>MVPs</th>
-				</tr>
+<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-8">
+	<div>
+		<Table shadow striped={true}>
+			<TableHead>
+				<TableHeadCell />
+				<TableHeadCell>Name</TableHeadCell>
+				<TableHeadCell>MVPs</TableHeadCell>
+			</TableHead>
+			<TableBody>
 				{#each mvps as stat, i}
-					<tr>
-						<th>{i + 1}</th>
-						<th>{stat.name}</th>
-						<th>{stat.total}</th>
-					</tr>
+					<TableBodyRow>
+						<TableBodyCell>{i + 1}</TableBodyCell>
+						<TableBodyCell>{stat.name}</TableBodyCell>
+						<TableBodyCell>{stat.total}</TableBodyCell>
+					</TableBodyRow>
 				{/each}
-			</table>
-		</div>
-		<div class="col-4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>Name</th>
-					<th>Salary</th>
-				</tr>
+			</TableBody>
+		</Table>
+	</div>
+	<div>
+		<Table shadow striped={true}>
+			<TableHead>
+				<TableHeadCell />
+				<TableHeadCell>Name</TableHeadCell>
+				<TableHeadCell>Salary</TableHeadCell>
+			</TableHead>
+			<TableBody>
 				{#each salaries as stat, i}
-					<tr>
-						<th>{i + 1}</th>
-						<th>{stat.name}</th>
-						<th>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</th>
-					</tr>
+					<TableBodyRow>
+						<TableBodyCell>{i + 1}</TableBodyCell>
+						<TableBodyCell>{stat.name}</TableBodyCell>
+						<TableBodyCell
+							>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</TableBodyCell
+						>
+					</TableBodyRow>
 				{/each}
-			</table>
-		</div>
-		<div class="col-4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>Name</th>
-					<th>World Series</th>
-				</tr>
+			</TableBody>
+		</Table>
+	</div>
+	<div>
+		<Table shadow striped={true}>
+			<TableHead>
+				<TableHeadCell />
+				<TableHeadCell>Name</TableHeadCell>
+				<TableHeadCell>World Series</TableHeadCell>
+			</TableHead>
+			<TableBody>
 				{#each worldSeries as stat, i}
-					<tr>
-						<th>{i + 1}</th>
-						<th>{stat.name}</th>
-						<th>{stat.total}</th>
-					</tr>
+					<TableBodyRow>
+						<TableBodyCell>{i + 1}</TableBodyCell>
+						<TableBodyCell>{stat.name}</TableBodyCell>
+						<TableBodyCell>{stat.total}</TableBodyCell>
+					</TableBodyRow>
 				{/each}
-			</table>
-		</div>
+			</TableBody>
+		</Table>
 	</div>
 
-	<div data-grid="ca-space-around center-center">
-		<div class="col-4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>Name</th>
-					<th>Average</th>
-				</tr>
+	<div>
+		<Table shadow striped={true}>
+			<TableHead>
+				<TableHeadCell />
+				<TableHeadCell>Name</TableHeadCell>
+				<TableHeadCell>Average</TableHeadCell>
+			</TableHead>
+			<TableBody>
 				{#each averages as stat, i}
-					<tr>
-						<th>{i + 1}</th>
-						<th>{stat.name}</th>
-						<th>.{stat.average}</th>
-					</tr>
+					<TableBodyRow>
+						<TableBodyCell>{i + 1}</TableBodyCell>
+						<TableBodyCell>{stat.name}</TableBodyCell>
+						<TableBodyCell>.{stat.average}</TableBodyCell>
+					</TableBodyRow>
 				{/each}
-			</table>
-		</div>
-		<div class="col-4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>Name</th>
-					<th>Home Runs</th>
-				</tr>
+			</TableBody>
+		</Table>
+	</div>
+	<div>
+		<Table shadow striped={true}>
+			<TableHead>
+				<TableHeadCell />
+				<TableHeadCell>Name</TableHeadCell>
+				<TableHeadCell>Home Runs</TableHeadCell>
+			</TableHead>
+			<TableBody>
 				{#each homeRuns as stat, i}
-					<tr>
-						<th>{i + 1}</th>
-						<th>{stat.name}</th>
-						<th>{stat.total}</th>
-					</tr>
+					<TableBodyRow>
+						<TableBodyCell>{i + 1}</TableBodyCell>
+						<TableBodyCell>{stat.name}</TableBodyCell>
+						<TableBodyCell>{stat.total}</TableBodyCell>
+					</TableBodyRow>
 				{/each}
-			</table>
-		</div>
-		<div class="col-4">
-			<table data-table="responsive striped">
-				<tr>
-					<th />
-					<th>Name</th>
-					<th>DRS</th>
-				</tr>
+			</TableBody>
+		</Table>
+	</div>
+	<div>
+		<Table shadow striped={true}>
+			<TableHead>
+				<TableHeadCell />
+				<TableHeadCell>Name</TableHeadCell>
+				<TableHeadCell>DRS</TableHeadCell>
+			</TableHead>
+			<TableBody>
 				{#each drs as stat, i}
-					<tr>
-						<th>{i + 1}</th>
-						<th>{stat.name}</th>
-						<th>{stat.total}</th>
-					</tr>
+					<TableBodyRow>
+						<TableBodyCell>{i + 1}</TableBodyCell>
+						<TableBodyCell>{stat.name}</TableBodyCell>
+						<TableBodyCell>{stat.total}</TableBodyCell>
+					</TableBodyRow>
 				{/each}
-			</table>
-		</div>
+			</TableBody>
+		</Table>
 	</div>
 </div>
-
-<style>
-	@media (max-width: 720px) {
-		table {
-			display: block;
-			width: 100%;
-			overflow-x: auto;
-		}
-
-		table th,
-		table td {
-			display: table-cell;
-		}
-
-		table thead {
-			display: table-header-group;
-		}
-
-		table tbody {
-			display: table-row-group;
-		}
-	}
-</style>

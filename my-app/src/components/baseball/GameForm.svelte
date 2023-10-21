@@ -2,6 +2,7 @@
 	import baseball_info from '../../info/baseball_info.json';
 	import { createEventDispatcher } from 'svelte';
 	import EndOfCareer from './EndOfCareer.svelte';
+	import { Input, Button } from 'flowbite-svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -49,66 +50,38 @@
 	}
 </script>
 
-<div data-grid="row">
-	<div class="col-12">
+<div class="flex flex-col items-center gap-1">
+	<div>
 		Team: {teamName}
 	</div>
-</div>
-<div data-grid="row">
-	<div class="col-12">
+	<div>
 		Overall:
 		<span style="color:{avgOverall > lastAvg ? 'green' : avgOverall == lastAvg ? '' : 'red'};">
 			{avgOverall}
 		</span>
 		<span class={`fi fi-${nationality}`} />
 	</div>
-</div>
-<div data-grid="row">
-	<div class="col-12">
+	<div>
 		Position:&nbsp;{baseball_info.positions[position - 1].name}
 	</div>
-</div>
-<div data-grid="row">
-	<div class="col-12">
+	<div>
 		Salary:&nbsp;${contractPay > 9 ? contractPay / 10 + 'M' : contractPay * 100 + 'k'}
 	</div>
 </div>
-
-{#if year < 13}
-	<form on:submit|preventDefault={advanceYear}>
-		<div data-grid="row">
-			<div class="col-12">
-				<input class="cta-button" type="submit" value="Play Year {year}" />
+<div class="flex flex-col items-center gap-2">
+	{#if year < 13}
+		<form on:submit|preventDefault={advanceYear}>
+			<div>
+				<Button type="submit">Play Year {year}</Button>
 			</div>
-		</div>
-	</form>
-{:else if !retired}
-	<form on:submit|preventDefault={endCareer}>
-		<div data-grid="row">
-			<div class="col-12">
-				<input class="cta-button" type="submit" value="Retire" />
+		</form>
+	{:else if !retired}
+		<form on:submit|preventDefault={endCareer}>
+			<div>
+				<Button type="submit">Retire</Button>
 			</div>
-		</div>
-	</form>
-{:else}
-	<EndOfCareer {stats} {mvps} {allStarAppearances} {totalSalary} {worldSeries} />
-{/if}
-
-<style>
-	.cta-button {
-		display: inline-block;
-		background-color: #ff5722;
-		color: #fff;
-		text-align: center;
-		padding: 10px 20px;
-		margin-top: 10px;
-		text-decoration: none;
-		border-radius: 5px;
-		font-size: 16px;
-		transition: background-color 0.3s;
-	}
-
-	.cta-button:hover {
-		background-color: #e64a19;
-	}
-</style>
+		</form>
+	{:else}
+		<EndOfCareer {stats} {mvps} {allStarAppearances} {totalSalary} {worldSeries} />
+	{/if}
+</div>
