@@ -65,11 +65,11 @@
 		background-color: #ff5722;
 		color: #fff;
 		text-align: center;
-		padding: 15px 30px;
-		margin-top: 20px;
+		padding: 10px 20px;
+		margin-top: 10px;
 		text-decoration: none;
 		border-radius: 5px;
-		font-size: 20px;
+		font-size: 16px;
 		transition: background-color 0.3s;
 	}
 
