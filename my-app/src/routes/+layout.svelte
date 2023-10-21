@@ -1,4 +1,5 @@
 <script>
+	import '../app.postcss';
 	import { onMount } from 'svelte';
 	import { ToastContainer, FlatToast } from 'svelte-toasts';
 
@@ -35,7 +36,7 @@
 	<a href="/info">Info</a>
 </div>
 
-<ToastContainer duration="5000" showProgress="true" theme="dark" placement="top-right" let:data>
+<ToastContainer duration="5000" showprogress="true" theme="dark" placement="top-right" let:data>
 	<FlatToast {data} />
 </ToastContainer>
 

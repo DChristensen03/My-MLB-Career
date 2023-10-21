@@ -5,6 +5,7 @@
 	import baseball_info from '../../../info/baseball_info.json';
 	import '/node_modules/flag-icons/css/flag-icons.min.css';
 	import RetireTable from '../../../components/baseball/RetireTable.svelte';
+	import { Label, Select, Heading, Button } from 'flowbite-svelte';
 
 	let nationality = 'us',
 		teamName,
@@ -226,50 +227,8 @@
 	}
 </script>
 
-<div style="position: relative; padding-left: 4rem; padding-right: 4rem;">
-	<div data-grid="row va-center">
-		<div class="col-12 align-center">
-			<h1>Welcome to My MLB Career</h1>
-		</div>
-	</div>
-
+<div>
 	{#if showStartForm}
-<<<<<<< Updated upstream
-		<!-- <div data-grid="row va-center">
-			<div class="col-12 align-center"> -->
-		<form class="form col-12" on:submit|preventDefault={handleSubmitStart}>
-			<div class="row">
-				<div class="col-3" />
-				<div class="field col-3 align-left">
-					<label for="nationalities">Nation</label>
-					<select name="nationalities" id="nationalities" bind:value={nationality}>
-						{#each baseball_info.nationalities as nation}
-							<option value={nation.abbreviation}>{nation.name}</option>
-						{/each}
-					</select>
-				</div>
-				<div class="field col-3 align-left">
-					<label for="positions">Position</label>
-					<select name="positions" id="positions" bind:value={position}>
-						{#each baseball_info.positions as position}
-							{#if position.name != 'P'}
-								<option value={position.number}>{position.name}</option>
-							{/if}
-						{/each}
-					</select>
-				</div>
-				<div class="col-3" />
-			</div>
-
-			<div class="row va-center">
-				<div class="col-12 align-center">
-					<input class="cta-button" type="submit" />
-				</div>
-			</div>
-		</form>
-		<!-- </div>
-		</div> -->
-=======
 		<div class="flex flex-col items-center gap-2">
 			<div>
 				<Heading tag="h3">Welcome to My MLB Career</Heading>
@@ -298,35 +257,30 @@
 			</div>
 		</div>
 		<!-- </div> -->
->>>>>>> Stashed changes
 	{/if}
 
 	{#if !showStartForm}
-		<div data-grid="row va-center">
-			<div class="col-12 align-center">
-				<GameForm
-					{teamName}
-					{overall}
-					{lastOverall}
-					{nationality}
-					{year}
-					{position}
-					{retired}
-					{contractPay}
-					{stats}
-					{worldSeries}
-					{totalSalary}
-					{mvps}
-					on:message={handleMessage}
-				/>
-			</div>
-		</div>
+		<GameForm
+			{teamName}
+			{overall}
+			{lastOverall}
+			{nationality}
+			{year}
+			{position}
+			{retired}
+			{contractPay}
+			{stats}
+			{worldSeries}
+			{totalSalary}
+			{mvps}
+			on:message={handleMessage}
+		/>
 	{/if}
 
-	<div data-grid="row" />
+	<div class="grid grid-row-1" />
 
 	{#if stats.length > 0}
-		<div data-grid="row ca-space-around ">
+		<div class="grid md:grid-cols-1 lg:grid-cols-2 px-8">
 			<StatsTable {stats} />
 		</div>
 	{/if}
@@ -344,22 +298,3 @@
 		on:message={handleMessage}
 	/>
 </div>
-
-<style>
-	.cta-button {
-		display: inline-block;
-		background-color: #ff5722;
-		color: #fff;
-		text-align: center;
-		padding: 10px 20px;
-		margin-top: 10px;
-		text-decoration: none;
-		border-radius: 5px;
-		font-size: 16px;
-		transition: background-color 0.3s;
-	}
-
-	.cta-button:hover {
-		background-color: #e64a19;
-	}
-</style>
