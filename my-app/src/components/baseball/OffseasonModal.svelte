@@ -47,7 +47,7 @@
 
 {#if isOpen}
 	<Modal dismissable={false} bind:open={isOpen}>
-		<div class="flex flex-col">
+		<div class="flex flex-col content-stretch">
 			<div data-grid="row">
 				<h2>
 					Offseason Contracts <br />
@@ -56,27 +56,29 @@
 			</div>
 		</div>
 
-		<div class="flex flex-row items-stretch">
-			<Table class="table-auto" striped={true} shadow>
-				<TableHead>
-					<TableHeadCell>Team</TableHeadCell>
-					<TableHeadCell>Salary</TableHeadCell>
-					<TableHeadCell>Years</TableHeadCell>
-				</TableHead>
-				<TableBody>
-					{#each offers as offer}
-						<TableBodyRow>
-							<MyTableBodyCell>{baseball_info.teams[offer.number].name}</MyTableBodyCell>
-							<MyTableBodyCell
-								>{offer.salary > 9
-									? offer.salary / 10 + 'M'
-									: offer.salary * 100 + 'k'}</MyTableBodyCell
-							>
-							<MyTableBodyCell>{offer.years}</MyTableBodyCell>
-						</TableBodyRow>
-					{/each}
-				</TableBody>
-			</Table>
+		<div class="flex flex-row grow">
+			<div class="grow">
+				<Table striped={true} shadow>
+					<TableHead>
+						<TableHeadCell>Team</TableHeadCell>
+						<TableHeadCell>Salary</TableHeadCell>
+						<TableHeadCell>Years</TableHeadCell>
+					</TableHead>
+					<TableBody>
+						{#each offers as offer}
+							<TableBodyRow>
+								<MyTableBodyCell>{baseball_info.teams[offer.number].name}</MyTableBodyCell>
+								<MyTableBodyCell
+									>{offer.salary > 9
+										? offer.salary / 10 + 'M'
+										: offer.salary * 100 + 'k'}</MyTableBodyCell
+								>
+								<MyTableBodyCell>{offer.years}</MyTableBodyCell>
+							</TableBodyRow>
+						{/each}
+					</TableBody>
+				</Table>
+			</div>
 		</div>
 
 		<form>
