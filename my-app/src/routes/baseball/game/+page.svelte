@@ -30,7 +30,7 @@
 		},
 		lastOverall = {};
 
-	let year = new Date().getFullYear(),
+	let year = 1,
 		isOffseason;
 
 	let stats = [],
@@ -115,7 +115,7 @@
 		if (teamScore > 7000) worldSeries++;
 
 		stats.push({
-			year,
+			year: year + new Date().getFullYear(),
 			average,
 			home_runs,
 			drs,
