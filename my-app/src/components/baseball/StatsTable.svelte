@@ -1,12 +1,6 @@
 <script>
-	import {
-		Table,
-		TableBody,
-		TableBodyCell,
-		TableBodyRow,
-		TableHead,
-		TableHeadCell
-	} from 'flowbite-svelte';
+	import { Table, TableBody, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
 
 	export let stats = [];
 </script>
@@ -23,11 +17,12 @@
 		{#each stats as stat, i}
 			{#if i < 6}
 				<TableBodyRow>
-					<TableBodyCell>{stat.year}</TableBodyCell>
-					<TableBodyCell>.{stat.average > 99 ? stat.average : '0' + stat.average}</TableBodyCell>
-					<TableBodyCell>{stat.home_runs}</TableBodyCell>
-					<TableBodyCell>{stat.drs}</TableBodyCell>
-					<TableBodyCell>{stat.teamName}</TableBodyCell>
+					<MyTableBodyCell>{stat.year}</MyTableBodyCell>
+					<MyTableBodyCell>.{stat.average > 99 ? stat.average : '0' + stat.average}</MyTableBodyCell
+					>
+					<MyTableBodyCell>{stat.home_runs}</MyTableBodyCell>
+					<MyTableBodyCell>{stat.drs}</MyTableBodyCell>
+					<MyTableBodyCell>{stat.teamName}</MyTableBodyCell>
 				</TableBodyRow>
 			{/if}
 		{/each}
@@ -47,11 +42,13 @@
 			{#each stats as stat, i}
 				{#if i >= 6}
 					<TableBodyRow>
-						<TableBodyCell>{stat.year}</TableBodyCell>
-						<TableBodyCell>.{stat.average > 99 ? stat.average : '0' + stat.average}</TableBodyCell>
-						<TableBodyCell>{stat.home_runs}</TableBodyCell>
-						<TableBodyCell>{stat.drs}</TableBodyCell>
-						<TableBodyCell>{stat.teamName}</TableBodyCell>
+						<MyTableBodyCell>{stat.year}</MyTableBodyCell>
+						<MyTableBodyCell
+							>.{stat.average > 99 ? stat.average : '0' + stat.average}</MyTableBodyCell
+						>
+						<MyTableBodyCell>{stat.home_runs}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.drs}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.teamName}</MyTableBodyCell>
 					</TableBodyRow>
 				{/if}
 			{/each}

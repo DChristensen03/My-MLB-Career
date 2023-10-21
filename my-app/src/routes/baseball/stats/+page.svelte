@@ -7,11 +7,11 @@
 		Select,
 		Table,
 		TableBody,
-		TableBodyCell,
 		TableBodyRow,
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
 
 	let mvps = [],
 		salaries = [],
@@ -98,9 +98,9 @@
 			<TableBody>
 				{#each mvps as stat, i}
 					<TableBodyRow>
-						<TableBodyCell>{i + 1}</TableBodyCell>
-						<TableBodyCell>{stat.name}</TableBodyCell>
-						<TableBodyCell>{stat.total}</TableBodyCell>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
@@ -116,10 +116,10 @@
 			<TableBody>
 				{#each salaries as stat, i}
 					<TableBodyRow>
-						<TableBodyCell>{i + 1}</TableBodyCell>
-						<TableBodyCell>{stat.name}</TableBodyCell>
-						<TableBodyCell
-							>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</TableBodyCell
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell
+							>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</MyTableBodyCell
 						>
 					</TableBodyRow>
 				{/each}
@@ -136,9 +136,9 @@
 			<TableBody>
 				{#each worldSeries as stat, i}
 					<TableBodyRow>
-						<TableBodyCell>{i + 1}</TableBodyCell>
-						<TableBodyCell>{stat.name}</TableBodyCell>
-						<TableBodyCell>{stat.total}</TableBodyCell>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
@@ -155,9 +155,9 @@
 			<TableBody>
 				{#each averages as stat, i}
 					<TableBodyRow>
-						<TableBodyCell>{i + 1}</TableBodyCell>
-						<TableBodyCell>{stat.name}</TableBodyCell>
-						<TableBodyCell>.{stat.average}</TableBodyCell>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>.{stat.average}</MyTableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
@@ -173,9 +173,9 @@
 			<TableBody>
 				{#each homeRuns as stat, i}
 					<TableBodyRow>
-						<TableBodyCell>{i + 1}</TableBodyCell>
-						<TableBodyCell>{stat.name}</TableBodyCell>
-						<TableBodyCell>{stat.total}</TableBodyCell>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
@@ -191,9 +191,9 @@
 			<TableBody>
 				{#each drs as stat, i}
 					<TableBodyRow>
-						<TableBodyCell>{i + 1}</TableBodyCell>
-						<TableBodyCell>{stat.name}</TableBodyCell>
-						<TableBodyCell>{stat.total}</TableBodyCell>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
