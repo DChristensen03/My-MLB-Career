@@ -4,13 +4,13 @@
 	import {
 		Table,
 		TableBody,
-		TableBodyCell,
 		TableBodyRow,
 		TableHead,
 		TableHeadCell,
 		Modal,
 		Button
 	} from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -43,7 +43,7 @@
 </script>
 
 {#if isOpen}
-	<Modal bind:open={isOpen}>
+	<Modal dismissable={false} bind:open={isOpen}>
 		<div class="flex flex-col">
 			<div data-grid="row">
 				<h2>
@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="flex flex-row items-stretch">
-			<Table class="table-fixed" striped={true} shadow>
+			<Table class="table-auto" striped={true} shadow>
 				<TableHead>
 					<TableHeadCell>Team</TableHeadCell>
 					<TableHeadCell>Salary</TableHeadCell>
@@ -63,13 +63,13 @@
 				<TableBody>
 					{#each offers as offer}
 						<TableBodyRow>
-							<TableBodyCell>{baseball_info.teams[offer.number].name}</TableBodyCell>
-							<TableBodyCell
+							<MyTableBodyCell>{baseball_info.teams[offer.number].name}</MyTableBodyCell>
+							<MyTableBodyCell
 								>{offer.salary > 9
 									? offer.salary / 10 + 'M'
-									: offer.salary * 100 + 'k'}</TableBodyCell
+									: offer.salary * 100 + 'k'}</MyTableBodyCell
 							>
-							<TableBodyCell>{offer.years}</TableBodyCell>
+							<MyTableBodyCell>{offer.years}</MyTableBodyCell>
 						</TableBodyRow>
 					{/each}
 				</TableBody>

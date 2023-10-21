@@ -229,35 +229,33 @@
 
 <div>
 	{#if showStartForm}
-		<form on:submit|preventDefault={handleSubmitStart}>
-			<div class="flex flex-col items-center gap-2">
-				<div>
-					<Heading tag="h3">Welcome to My MLB Career</Heading>
-				</div>
-				<div>
-					<Label for="nationalities">Nation</Label>
-					<Select name="nationalities" id="nationalities" placeholder="" bind:value={nationality}>
-						{#each baseball_info.nationalities as nation}
-							<option value={nation.abbreviation}>{nation.name}</option>
-						{/each}
-					</Select>
-				</div>
-				<div>
-					<Label for="positions">Position</Label>
-					<Select name="positions" id="positions" placeholder="" bind:value={position}>
-						{#each baseball_info.positions as position}
-							{#if position.name != 'P'}
-								<option value={position.number}>{position.name}</option>
-							{/if}
-						{/each}
-					</Select>
-				</div>
-
-				<div>
-					<Button type="submit" color="primary">Submit</Button>
-				</div>
+		<div class="flex flex-col items-center gap-2">
+			<div>
+				<Heading tag="h3">Welcome to My MLB Career</Heading>
 			</div>
-		</form>
+			<div>
+				<Label for="nationalities">Nation</Label>
+				<Select name="nationalities" id="nationalities" placeholder="" bind:value={nationality}>
+					{#each baseball_info.nationalities as nation}
+						<option value={nation.abbreviation}>{nation.name}</option>
+					{/each}
+				</Select>
+			</div>
+			<div>
+				<Label for="positions">Position</Label>
+				<Select name="positions" id="positions" placeholder="" bind:value={position}>
+					{#each baseball_info.positions as position}
+						{#if position.name != 'P'}
+							<option value={position.number}>{position.name}</option>
+						{/if}
+					{/each}
+				</Select>
+			</div>
+
+			<div>
+				<Button on:click={handleSubmitStart} type="submit">Submit</Button>
+			</div>
+		</div>
 		<!-- </div> -->
 	{/if}
 

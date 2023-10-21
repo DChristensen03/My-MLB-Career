@@ -3,11 +3,12 @@
 		Heading,
 		Table,
 		TableBody,
-		TableBodyCell,
 		TableBodyRow,
 		TableHead,
 		TableHeadCell
 	} from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
+
 	export let stats, allStarAppearances, mvps, worldSeries, totalSalary;
 
 	function getCareerAverage() {
@@ -52,16 +53,16 @@
 			</TableHead>
 			<TableBody>
 				<TableBodyRow>
-					<TableBodyCell>{allStarAppearances}</TableBodyCell>
-					<TableBodyCell>{mvps}</TableBodyCell>
-					<TableBodyCell>{worldSeries}</TableBodyCell>
-					<TableBodyCell
-						>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</TableBodyCell
+					<MyTableBodyCell>{allStarAppearances}</MyTableBodyCell>
+					<MyTableBodyCell>{mvps}</MyTableBodyCell>
+					<MyTableBodyCell>{worldSeries}</MyTableBodyCell>
+					<MyTableBodyCell
+						>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</MyTableBodyCell
 					>
 					{#if allStarAppearances + mvps * 4 >= 15}
-						<TableBodyCell>✓</TableBodyCell>
+						<MyTableBodyCell>✓</MyTableBodyCell>
 					{:else}
-						<TableBodyCell>✗</TableBodyCell>
+						<MyTableBodyCell>✗</MyTableBodyCell>
 					{/if}
 				</TableBodyRow>
 			</TableBody>
@@ -76,9 +77,9 @@
 			</TableHead>
 			<TableBody>
 				<TableBodyRow>
-					<TableBodyCell>.{getCareerAverage()}</TableBodyCell>
-					<TableBodyCell>{getCareerHomeRuns()}</TableBodyCell>
-					<TableBodyCell>{getCareerDRS()}</TableBodyCell>
+					<MyTableBodyCell>.{getCareerAverage()}</MyTableBodyCell>
+					<MyTableBodyCell>{getCareerHomeRuns()}</MyTableBodyCell>
+					<MyTableBodyCell>{getCareerDRS()}</MyTableBodyCell>
 				</TableBodyRow>
 			</TableBody>
 		</Table>
