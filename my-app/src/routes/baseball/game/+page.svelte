@@ -30,7 +30,7 @@
 		},
 		lastOverall = {};
 
-	let year = 1,
+	let year = new Date().getFullYear(),
 		isOffseason;
 
 	let stats = [],
