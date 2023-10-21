@@ -1,4 +1,6 @@
 <script>
+	import { Label, Button, Input } from 'flowbite-svelte';
+
 	export let stats = {},
 		mvps,
 		allStarAppearances,
@@ -33,21 +35,14 @@
 </script>
 
 <form on:submit|preventDefault={reset}>
-	<div data-grid="row">
-		<div class="col-12">
-			<label for="name">Name: </label>
-			<input name="name" id="name" type="text" maxlength="25" bind:value={name} />
-		</div>
+	<div>
+		<Label for="name">Name:</Label>
+		<Input name="name" id="name" type="text" maxlength="25" bind:value={name} />
 	</div>
-	<div data-grid="row">
-		<div class="col-12">
-			<input
-				class="align-center cta-button {loading ? 'loading' : ''}"
-				type="submit"
-				value="Reset"
-				disabled={name === '' || loading}
-			/>
-		</div>
+	<div>
+		<Button class={loading ? 'loading' : ''} type="submit" disabled={name === '' || loading}>
+			Reset
+		</Button>
 	</div>
 </form>
 
@@ -58,22 +53,5 @@
 		background-size: 15px 15px;
 		background-position: right center;
 		background-repeat: no-repeat;
-	}
-
-	.cta-button {
-		display: inline-block;
-		background-color: #ff5722;
-		color: #fff;
-		text-align: center;
-		padding: 10px 20px;
-		margin-top: 10px;
-		text-decoration: none;
-		border-radius: 5px;
-		font-size: 16px;
-		transition: background-color 0.3s;
-	}
-
-	.cta-button:hover {
-		background-color: #e64a19;
 	}
 </style>

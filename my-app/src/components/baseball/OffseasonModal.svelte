@@ -1,7 +1,16 @@
 <script>
-	import Modal from '../Modal.svelte';
 	import baseball_info from '../../info/baseball_info.json';
 	import { createEventDispatcher } from 'svelte';
+	import {
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell,
+		Modal,
+		Button
+	} from 'flowbite-svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -34,81 +43,66 @@
 </script>
 
 {#if isOpen}
-	<Modal showModal={isOpen}>
-		<div data-grid="row" slot="header">
-			<h2>
-				Offseason Contracts <br />
-				<small>View your offseason contract offers</small>
-			</h2>
-		</div>
-
-		<div data-grid="row">
-			<table data-table="responsive striped">
-				<tr>
-					<th>Team</th>
-					<th>Salary</th>
-					<th>Years</th>
-				</tr>
-				{#each offers as offer}
-					<tr>
-						<th>{baseball_info.teams[offer.number].name}</th>
-						<th>{offer.salary > 9 ? offer.salary / 10 + 'M' : offer.salary * 100 + 'k'}</th>
-						<th>{offer.years}</th>
-					</tr>
-				{/each}
-			</table>
-		</div>
-
-		<form class="form">
+	<Modal bind:open={isOpen}>
+		<div class="flex flex-col">
 			<div data-grid="row">
-				<div data-col="4">
-					<button
-						class="button small center-center"
+				<h2>
+					Offseason Contracts <br />
+					<small>View your offseason contract offers</small>
+				</h2>
+			</div>
+		</div>
+
+		<div class="flex flex-row items-stretch">
+			<Table class="table-fixed" striped={true} shadow>
+				<TableHead>
+					<TableHeadCell>Team</TableHeadCell>
+					<TableHeadCell>Salary</TableHeadCell>
+					<TableHeadCell>Years</TableHeadCell>
+				</TableHead>
+				<TableBody>
+					{#each offers as offer}
+						<TableBodyRow>
+							<TableBodyCell>{baseball_info.teams[offer.number].name}</TableBodyCell>
+							<TableBodyCell
+								>{offer.salary > 9
+									? offer.salary / 10 + 'M'
+									: offer.salary * 100 + 'k'}</TableBodyCell
+							>
+							<TableBodyCell>{offer.years}</TableBodyCell>
+						</TableBodyRow>
+					{/each}
+				</TableBody>
+			</Table>
+		</div>
+
+		<form>
+			<div class="flex flex-cols-3 justify-around">
+				<div>
+					<Button
+						size="sm"
 						on:click={() => {
 							selectTeam(0);
-						}}>Offer A</button
+						}}>Offer A</Button
 					>
 				</div>
-				<div data-col="4">
-					<button
-						class="button small center-center"
+				<div>
+					<Button
+						size="sm"
 						on:click={() => {
 							selectTeam(1);
-						}}>Offer B</button
+						}}>Offer B</Button
 					>
 				</div>
-				<div data-col="4">
-					<button
-						class="button small center-center"
+				<div>
+					<Button
+						size="sm"
 						on:click={() => {
 							selectTeam(2);
-						}}>Current Team</button
+						}}>Current Team</Button
 					>
 				</div>
 			</div>
 		</form>
 	</Modal>
 {/if}
-
-<style>
-	@media (max-width: 720px) {
-		table {
-			display: block;
-			width: 100%;
-			overflow-x: auto;
-		}
-
-		table th,
-		table td {
-			display: table-cell;
-		}
-
-		table thead {
-			display: table-header-group;
-		}
-
-		table tbody {
-			display: table-row-group;
-		}
-	}
-</style>
