@@ -1,5 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
 	let mvps = [],
 		salaries = [],
 		worldSeries = [],
@@ -13,7 +15,7 @@
 	$: show_stats, amount, updateStats();
 
 	async function updateStats() {
-		if (process.browser) {
+		if (browser) {
 			const response = await fetch(`/baseball/stats/${show_stats}`, {
 				method: 'POST',
 				body: JSON.stringify({
