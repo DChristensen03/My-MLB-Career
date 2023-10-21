@@ -1,4 +1,17 @@
 <script>
+<<<<<<< Updated upstream
+=======
+	import {
+		Heading,
+		Table,
+		TableBody,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
+
+>>>>>>> Stashed changes
 	export let stats, allStarAppearances, mvps, worldSeries, totalSalary;
 
 	function getCareerAverage() {
@@ -31,6 +44,7 @@
 		<h1>🏆Trophy Case🏆</h1>
 	</div>
 </div>
+<<<<<<< Updated upstream
 <div data-grid="row center-center">
 	<div class="col-4">
 		<table data-table="responsive striped">
@@ -53,11 +67,36 @@
 						<th>✓</th>
 					{:else}
 						<th>✗</th>
+=======
+<div class="grid md:grid-cols-1 lg:grid-cols-2 sm:justify-items-center px-8">
+	<div>
+		<Table striped={true}>
+			<TableHead>
+				<TableHeadCell>All-Stars</TableHeadCell>
+				<TableHeadCell>MVPs</TableHeadCell>
+				<TableHeadCell>World Series</TableHeadCell>
+				<TableHeadCell>Career Earnings</TableHeadCell>
+				<TableHeadCell>Hall of Fame</TableHeadCell>
+			</TableHead>
+			<TableBody>
+				<TableBodyRow>
+					<MyTableBodyCell>{allStarAppearances}</MyTableBodyCell>
+					<MyTableBodyCell>{mvps}</MyTableBodyCell>
+					<MyTableBodyCell>{worldSeries}</MyTableBodyCell>
+					<MyTableBodyCell
+						>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</MyTableBodyCell
+					>
+					{#if allStarAppearances + mvps * 4 >= 15}
+						<MyTableBodyCell>✓</MyTableBodyCell>
+					{:else}
+						<MyTableBodyCell>✗</MyTableBodyCell>
+>>>>>>> Stashed changes
 					{/if}
 				</tr>
 			</tbody>
 		</table>
 	</div>
+<<<<<<< Updated upstream
 	<div class="col-4">
 		<table data-table="responsive striped">
 			<thead>
@@ -75,6 +114,23 @@
 				</tr>
 			</tbody>
 		</table>
+=======
+	<div>
+		<Table striped={true}>
+			<TableHead>
+				<TableHeadCell>Career Average</TableHeadCell>
+				<TableHeadCell>Home Runs</TableHeadCell>
+				<TableHeadCell>Defensive Runs Saved</TableHeadCell>
+			</TableHead>
+			<TableBody>
+				<TableBodyRow>
+					<MyTableBodyCell>.{getCareerAverage()}</MyTableBodyCell>
+					<MyTableBodyCell>{getCareerHomeRuns()}</MyTableBodyCell>
+					<MyTableBodyCell>{getCareerDRS()}</MyTableBodyCell>
+				</TableBodyRow>
+			</TableBody>
+		</Table>
+>>>>>>> Stashed changes
 	</div>
 </div>
 

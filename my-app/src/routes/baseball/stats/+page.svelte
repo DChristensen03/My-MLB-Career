@@ -1,6 +1,20 @@
 <script>
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+<<<<<<< Updated upstream
+=======
+	import {
+		Input,
+		Label,
+		Select,
+		Table,
+		TableBody,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
+>>>>>>> Stashed changes
 
 	let mvps = [],
 		salaries = [],
@@ -73,11 +87,19 @@
 					<th>MVPs</th>
 				</tr>
 				{#each mvps as stat, i}
+<<<<<<< Updated upstream
 					<tr>
 						<th>{i + 1}</th>
 						<th>{stat.name}</th>
 						<th>{stat.total}</th>
 					</tr>
+=======
+					<TableBodyRow>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
+					</TableBodyRow>
+>>>>>>> Stashed changes
 				{/each}
 			</table>
 		</div>
@@ -89,11 +111,21 @@
 					<th>Salary</th>
 				</tr>
 				{#each salaries as stat, i}
+<<<<<<< Updated upstream
 					<tr>
 						<th>{i + 1}</th>
 						<th>{stat.name}</th>
 						<th>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</th>
 					</tr>
+=======
+					<TableBodyRow>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell
+							>${stat.total > 9 ? stat.total / 10 + 'M' : stat.total * 100 + 'k'}</MyTableBodyCell
+						>
+					</TableBodyRow>
+>>>>>>> Stashed changes
 				{/each}
 			</table>
 		</div>
@@ -105,11 +137,19 @@
 					<th>World Series</th>
 				</tr>
 				{#each worldSeries as stat, i}
+<<<<<<< Updated upstream
 					<tr>
 						<th>{i + 1}</th>
 						<th>{stat.name}</th>
 						<th>{stat.total}</th>
 					</tr>
+=======
+					<TableBodyRow>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
+					</TableBodyRow>
+>>>>>>> Stashed changes
 				{/each}
 			</table>
 		</div>
@@ -124,11 +164,19 @@
 					<th>Average</th>
 				</tr>
 				{#each averages as stat, i}
+<<<<<<< Updated upstream
 					<tr>
 						<th>{i + 1}</th>
 						<th>{stat.name}</th>
 						<th>.{stat.average}</th>
 					</tr>
+=======
+					<TableBodyRow>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>.{stat.average}</MyTableBodyCell>
+					</TableBodyRow>
+>>>>>>> Stashed changes
 				{/each}
 			</table>
 		</div>
@@ -140,11 +188,19 @@
 					<th>Home Runs</th>
 				</tr>
 				{#each homeRuns as stat, i}
+<<<<<<< Updated upstream
 					<tr>
 						<th>{i + 1}</th>
 						<th>{stat.name}</th>
 						<th>{stat.total}</th>
 					</tr>
+=======
+					<TableBodyRow>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
+					</TableBodyRow>
+>>>>>>> Stashed changes
 				{/each}
 			</table>
 		</div>
@@ -156,11 +212,19 @@
 					<th>DRS</th>
 				</tr>
 				{#each drs as stat, i}
+<<<<<<< Updated upstream
 					<tr>
 						<th>{i + 1}</th>
 						<th>{stat.name}</th>
 						<th>{stat.total}</th>
 					</tr>
+=======
+					<TableBodyRow>
+						<MyTableBodyCell>{i + 1}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.name}</MyTableBodyCell>
+						<MyTableBodyCell>{stat.total}</MyTableBodyCell>
+					</TableBodyRow>
+>>>>>>> Stashed changes
 				{/each}
 			</table>
 		</div>

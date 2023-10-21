@@ -2,6 +2,19 @@
 	import Modal from '../Modal.svelte';
 	import baseball_info from '../../info/baseball_info.json';
 	import { createEventDispatcher } from 'svelte';
+<<<<<<< Updated upstream
+=======
+	import {
+		Table,
+		TableBody,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell,
+		Modal,
+		Button
+	} from 'flowbite-svelte';
+	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
+>>>>>>> Stashed changes
 
 	const dispatch = createEventDispatcher();
 
@@ -34,6 +47,7 @@
 </script>
 
 {#if isOpen}
+<<<<<<< Updated upstream
 	<Modal showModal={isOpen}>
 		<div data-grid="row" slot="header">
 			<h2>
@@ -57,6 +71,39 @@
 					</tr>
 				{/each}
 			</table>
+=======
+	<Modal dismissable={false} bind:open={isOpen}>
+		<div class="flex flex-col">
+			<div data-grid="row">
+				<h2>
+					Offseason Contracts <br />
+					<small>View your offseason contract offers</small>
+				</h2>
+			</div>
+		</div>
+
+		<div class="flex flex-row items-stretch">
+			<Table class="table-auto" striped={true} shadow>
+				<TableHead>
+					<TableHeadCell>Team</TableHeadCell>
+					<TableHeadCell>Salary</TableHeadCell>
+					<TableHeadCell>Years</TableHeadCell>
+				</TableHead>
+				<TableBody>
+					{#each offers as offer}
+						<TableBodyRow>
+							<MyTableBodyCell>{baseball_info.teams[offer.number].name}</MyTableBodyCell>
+							<MyTableBodyCell
+								>{offer.salary > 9
+									? offer.salary / 10 + 'M'
+									: offer.salary * 100 + 'k'}</MyTableBodyCell
+							>
+							<MyTableBodyCell>{offer.years}</MyTableBodyCell>
+						</TableBodyRow>
+					{/each}
+				</TableBody>
+			</Table>
+>>>>>>> Stashed changes
 		</div>
 
 		<form class="form">
