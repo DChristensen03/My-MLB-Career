@@ -13,23 +13,25 @@
 	$: show_stats, amount, updateStats();
 
 	async function updateStats() {
-		const response = await fetch(`/baseball/stats/${show_stats}`, {
-			method: 'POST',
-			body: JSON.stringify({
-				userid: localStorage.getItem('userid'),
-				amount
-			}),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-		const stats = await response.json();
-		mvps = stats.baseball_career_mvps;
-		salaries = stats.baseball_career_salary;
-		worldSeries = stats.baseball_career_world_series;
-		averages = stats.baseball_career_average;
-		homeRuns = stats.baseball_career_home_runs;
-		drs = stats.baseball_career_defensive_runs_saved;
+		if (process.browser) {
+			const response = await fetch(`/baseball/stats/${show_stats}`, {
+				method: 'POST',
+				body: JSON.stringify({
+					userid: localStorage.getItem('userid'),
+					amount
+				}),
+				headers: {
+					'content-type': 'application/json'
+				}
+			});
+			const stats = await response.json();
+			mvps = stats.baseball_career_mvps;
+			salaries = stats.baseball_career_salary;
+			worldSeries = stats.baseball_career_world_series;
+			averages = stats.baseball_career_average;
+			homeRuns = stats.baseball_career_home_runs;
+			drs = stats.baseball_career_defensive_runs_saved;
+		}
 	}
 
 	onMount(async () => {
