@@ -226,7 +226,7 @@
 	}
 </script>
 
-<div style="position: relative;">
+<div style="position: relative; padding-left: 4rem; padding-right: 4rem;">
 	<div data-grid="row va-center">
 		<div class="col-12 align-center">
 			<h1>Welcome to My MLB Career</h1>
@@ -295,7 +295,7 @@
 	<div data-grid="row" />
 
 	{#if stats.length > 0}
-		<div data-grid="row">
+		<div data-grid="row ca-space-around ">
 			<StatsTable {stats} />
 		</div>
 	{/if}

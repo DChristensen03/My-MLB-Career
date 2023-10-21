@@ -39,7 +39,7 @@
 	<FlatToast {data} />
 </ToastContainer>
 
-<div style="padding: 4rem;">
+<div>
 	<slot />
 </div>
 
