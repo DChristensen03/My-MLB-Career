@@ -1,8 +1,6 @@
 <script>
 	import baseball_info from '../../info/baseball_info.json';
 	import { createEventDispatcher } from 'svelte';
-<<<<<<< Updated upstream
-=======
 	import {
 		Table,
 		TableBody,
@@ -13,7 +11,6 @@
 		Button
 	} from 'flowbite-svelte';
 	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
->>>>>>> Stashed changes
 
 	const dispatch = createEventDispatcher();
 
