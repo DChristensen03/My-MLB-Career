@@ -236,7 +236,7 @@
 				</div>
 				<div>
 					<Label for="nationalities">Nation</Label>
-					<Select name="nationalities" id="nationalities" bind:value={nationality}>
+					<Select name="nationalities" id="nationalities" placeholder="" bind:value={nationality}>
 						{#each baseball_info.nationalities as nation}
 							<option value={nation.abbreviation}>{nation.name}</option>
 						{/each}
@@ -244,7 +244,7 @@
 				</div>
 				<div>
 					<Label for="positions">Position</Label>
-					<Select name="positions" id="positions" bind:value={position}>
+					<Select name="positions" id="positions" placeholder="" bind:value={position}>
 						{#each baseball_info.positions as position}
 							{#if position.name != 'P'}
 								<option value={position.number}>{position.name}</option>
