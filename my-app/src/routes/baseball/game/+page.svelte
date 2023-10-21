@@ -160,7 +160,7 @@
 		offers.push({
 			number: getRandomInt(0, baseball_info.teams.length - 1),
 			salary: salaries[0],
-			years: getRandomInt(1, 3)
+			years: getRandomInt(1, 6)
 		});
 		while (offers[0].number == teamNumber) {
 			offers[0].number = getRandomInt(0, baseball_info.teams.length - 1);
@@ -169,7 +169,7 @@
 		offers.push({
 			number: getRandomInt(0, baseball_info.teams.length - 1),
 			salary: salaries[1],
-			years: getRandomInt(1, 3)
+			years: getRandomInt(1, 6)
 		});
 		while (offers[1].number == teamNumber || offers[0].number == offers[1].number) {
 			offers[1].number = getRandomInt(0, baseball_info.teams.length - 1);
