@@ -32,7 +32,7 @@
 	$: activeUrl = $page.url.pathname;
 </script>
 
-<Navbar>
+<Navbar class="bg-secondary-500 text-white">
 	<NavBrand href="/">
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
 			>My Sports Career</span
@@ -40,14 +40,24 @@
 	</NavBrand>
 	<NavHamburger />
 	<NavUl {activeUrl}>
-		<NavLi href="/">Home</NavLi>
-		<NavLi>Baseball</NavLi>
+		<NavLi
+			activeClass="text-primary-500"
+			nonActiveClass="text-light hover:text-primary-500"
+			href="/">Home</NavLi
+		>
+		<NavLi activeClass="text-primary-500" nonActiveClass="text-light hover:text-primary-500"
+			>Baseball</NavLi
+		>
 		<Dropdown>
 			<DropdownItem href="/baseball/game">Play Game</DropdownItem>
 			<DropdownItem href="/baseball/stats">Scoreboard</DropdownItem>
 			<DropdownItem href="/baseball/tutorial">Tutorial</DropdownItem>
 		</Dropdown>
-		<NavLi href="/info">Info</NavLi>
+		<NavLi
+			activeClass="text-primary-500"
+			nonActiveClass="text-light hover:text-primary-500"
+			href="/info">Info</NavLi
+		>
 	</NavUl>
 </Navbar>
 
