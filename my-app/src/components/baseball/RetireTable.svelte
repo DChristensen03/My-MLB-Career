@@ -16,7 +16,8 @@
 		for (let stat of stats) {
 			total += stat.average;
 		}
-		return Math.round(total / 12);
+		const average = Math.round(total / 12);
+		return average > 99 ? average : `0${average}`;
 	}
 
 	function getCareerDRS() {

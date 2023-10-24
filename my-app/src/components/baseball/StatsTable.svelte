@@ -5,7 +5,7 @@
 	export let stats = [];
 </script>
 
-<Table striped={true}>
+<Table shadow striped={true}>
 	<TableHead>
 		<TableHeadCell />
 		<TableHeadCell>AVG</TableHeadCell>
@@ -29,8 +29,8 @@
 	</TableBody>
 </Table>
 
-<Table striped={true}>
-	{#if stats.length >= 7}
+{#if stats.length >= 7}
+	<Table shadow striped={true}>
 		<TableHead>
 			<TableHeadCell />
 			<TableHeadCell>AVG</TableHeadCell>
@@ -53,5 +53,5 @@
 				{/if}
 			{/each}
 		</TableBody>
-	{/if}
-</Table>
+	</Table>
+{/if}

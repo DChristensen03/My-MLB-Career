@@ -45,15 +45,13 @@
 {#if isOpen}
 	<Modal dismissable={false} bind:open={isOpen}>
 		<div class="flex flex-col content-stretch">
-			<div data-grid="row">
-				<h2>
-					Offseason Contracts <br />
-					<small>View your offseason contract offers</small>
-				</h2>
-			</div>
+			<h2>
+				Offseason Contracts <br />
+				<small>View your offseason contract offers</small>
+			</h2>
 		</div>
 
-		<div class="flex flex-row grow">
+		<div class="flex flex-row">
 			<div class="grow">
 				<Table striped={true} shadow>
 					<TableHead>

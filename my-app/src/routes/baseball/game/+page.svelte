@@ -280,7 +280,7 @@
 	<div class="grid grid-row-1" />
 
 	{#if stats.length > 0}
-		<div class="grid md:grid-cols-1 lg:grid-cols-2 px-8">
+		<div class="grid md:grid-cols-1 lg:grid-cols-2 px-8 lg:space-x-3">
 			<StatsTable {stats} />
 		</div>
 	{/if}

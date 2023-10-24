@@ -1,5 +1,5 @@
 <script>
-	import { Label, Button, Input } from 'flowbite-svelte';
+	import { Label, Button, Input, Spinner } from 'flowbite-svelte';
 
 	export let stats = {},
 		mvps,
@@ -34,24 +34,16 @@
 	}
 </script>
 
-<form on:submit|preventDefault={reset}>
-	<div>
-		<Label for="name">Name:</Label>
-		<Input name="name" id="name" type="text" maxlength="25" bind:value={name} />
-	</div>
-	<div>
-		<Button class={loading ? 'loading' : ''} type="submit" disabled={name === '' || loading}>
-			Reset
-		</Button>
-	</div>
-</form>
-
-<style>
-	.loading {
-		background-color: #ffffff;
-		background-image: url('https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif');
-		background-size: 15px 15px;
-		background-position: right center;
-		background-repeat: no-repeat;
-	}
-</style>
+<div>
+	<Label for="name">Name:</Label>
+	<Input name="name" id="name" type="text" maxlength="25" bind:value={name} />
+</div>
+<div>
+	<!-- There's no good way to disable conditionally -->
+	<Button on:click={reset} class={loading ? 'loading' : ''} disabled={name === '' || loading}>
+		Reset
+		{#if loading}
+			<Spinner size="4" class="ml-1" />
+		{/if}
+	</Button>
+</div>

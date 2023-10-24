@@ -1,10 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
 	import { toasts } from 'svelte-toasts';
+	import { Button, Spinner, Label, Input } from 'flowbite-svelte';
 
 	let userid = '',
 		username = '',
 		loading = false;
+
+	$: infoChanged = !(
+		userid == localStorage.getItem('userid') && username == localStorage.getItem('username')
+	);
 
 	onMount(() => {
 		userid = localStorage.getItem('userid');
@@ -13,9 +18,7 @@
 
 	async function handleSubmit() {
 		loading = true;
-		if (
-			!(userid == localStorage.getItem('userid') && username == localStorage.getItem('username'))
-		) {
+		if (infoChanged) {
 			await fetch('/info', {
 				method: 'POST',
 				body: JSON.stringify({
@@ -67,60 +70,34 @@
 	}
 </script>
 
-<form class="form" on:submit|preventDefault={handleSubmit}>
-	<div class="row" data-grid="center-center">
-		<div class="field" data-col="4">
-			<label for="user-key">User Key</label>
-			<input name="user-key" id="user-key" type="text" maxlength="36" bind:value={userid} />
-		</div>
-		<div class="field" data-col="4">
-			<label for="user-name">Name</label>
-			<input name="user-name" id="user-name" type="text" maxlength="25" bind:value={username} />
-		</div>
+<div class="grid grid-rows-4 justify-items-center sm:space-y-1 md:space-y-2 m-1">
+	<div>
+		<Label for="user-key">User Key</Label>
+		<Input name="user-key" id="user-key" type="text" maxlength="36" bind:value={userid} />
+	</div>
+	<div class="field">
+		<Label for="user-name">Name</Label>
+		<Input name="user-name" id="user-name" type="text" maxlength="25" bind:value={username} />
 	</div>
 
-	<div class="row" data-grid="center-center">
-		<div class="col-6 align-center">
-			<small
-				><em
-					>If you started on another device you can take the User Key from that device and update it
-					here. If you update your User Key your two devices will now be linked. You can also add
-					your name for easier lookup.
-				</em></small
-			>
-		</div>
+	<div class="text-center">
+		<small
+			><em
+				>If you started on another device you can take the User Key from that device and update it
+				here. If you update your User Key your two devices will now be linked. You can also add your
+				name for easier lookup.<br />
+				If you clear your browser cache your user key will no longer be stored. Please save your key
+				before doing so to prevent data loss.
+			</em></small
+		>
 	</div>
 
-	<div data-grid="row">
-		<div class="col-12 align-center">
-			<input disabled={loading} class="cta-button {loading ? 'loading' : ''}" type="submit" />
-		</div>
+	<div>
+		<Button on:click={handleSubmit} disabled={loading || !infoChanged}>
+			Submit
+			{#if loading}
+				<Spinner size="4" class="ml-1" />
+			{/if}
+		</Button>
 	</div>
-</form>
-
-<style>
-	.loading {
-		background-color: #ffffff;
-		background-image: url('https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif');
-		background-size: 15px 15px;
-		background-position: right center;
-		background-repeat: no-repeat;
-	}
-
-	.cta-button {
-		display: inline-block;
-		background-color: #ff5722;
-		color: #fff;
-		text-align: center;
-		padding: 10px 20px;
-		margin-top: 10px;
-		text-decoration: none;
-		border-radius: 5px;
-		font-size: 16px;
-		transition: background-color 0.3s;
-	}
-
-	.cta-button:hover {
-		background-color: #e64a19;
-	}
-</style>
+</div>

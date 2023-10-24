@@ -1,7 +1,18 @@
 <script>
 	import '../app.postcss';
+	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { ToastContainer, FlatToast } from 'svelte-toasts';
+	import {
+		Navbar,
+		NavLi,
+		NavUl,
+		NavHamburger,
+		NavBrand,
+		Dropdown,
+		DropdownItem
+	} from 'flowbite-svelte';
+	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 
 	onMount(async () => {
 		if (localStorage.getItem('userid') === null) {
@@ -18,6 +29,8 @@
 			localStorage.setItem('userid', userid);
 		}
 	});
+
+	$: activeUrl = $page.url.pathname;
 </script>
 
 <div class="navbar">
@@ -35,6 +48,27 @@
 	</div>
 	<a href="/info">Info</a>
 </div>
+
+<Navbar>
+	<NavBrand href="/">
+		<img src="" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite</span
+		>
+	</NavBrand>
+	<NavHamburger />
+	<NavUl {activeUrl}>
+		<NavLi href="/">Home</NavLi>
+		<NavLi class="cursor-pointer"
+			>Baseball<ChevronDownOutline class="w-3 h-3 ml-2 text-primary-800 dark:text-white inline" />
+		</NavLi>
+		<Dropdown class="w-44 z-20">
+			<DropdownItem href="/baseball/game">Play Game</DropdownItem>
+			<DropdownItem href="/baseball/stats">Scoreboard</DropdownItem>
+			<DropdownItem href="/baseball/tutorial">Tutorial</DropdownItem>
+		</Dropdown>
+		<NavLi href="/info">Info</NavLi>
+	</NavUl>
+</Navbar>
 
 <ToastContainer duration="5000" showprogress="true" theme="dark" placement="top-right" let:data>
 	<FlatToast {data} />
