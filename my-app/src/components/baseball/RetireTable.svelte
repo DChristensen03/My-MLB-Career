@@ -8,6 +8,7 @@
 		TableHeadCell
 	} from 'flowbite-svelte';
 	import MyTableBodyCell from '$lib/MyTableBodyCell.svelte';
+	import StatsTable from './StatsTable.svelte';
 
 	export let stats, allStarAppearances, mvps, worldSeries, totalSalary;
 
@@ -42,8 +43,8 @@
 		<Heading tag="h2">🏆Trophy Case🏆</Heading>
 	</div>
 </div>
-<div class="grid md:grid-cols-1 lg:grid-cols-2 sm:justify-items-center px-8">
-	<div>
+<div class="grid md:grid-cols-1 lg:grid-cols-2 sm:align-items-center px-8">
+	<div class="hidden md:block">
 		<Table striped={true}>
 			<TableHead>
 				<TableHeadCell>All-Stars</TableHeadCell>
@@ -60,11 +61,39 @@
 					<MyTableBodyCell
 						>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</MyTableBodyCell
 					>
-					{#if allStarAppearances + mvps * 4 >= 15}
-						<MyTableBodyCell>✓</MyTableBodyCell>
-					{:else}
-						<MyTableBodyCell>✗</MyTableBodyCell>
-					{/if}
+					<MyTableBodyCell>{allStarAppearances + mvps * 4 >= 15 ? '✓' : '✗'}</MyTableBodyCell>
+				</TableBodyRow>
+			</TableBody>
+		</Table>
+	</div>
+	<div class="block md:hidden">
+		<Table striped={true}>
+			<TableHead>
+				<TableHeadCell>All-Stars</TableHeadCell>
+				<TableHeadCell>MVPs</TableHeadCell>
+				<TableHeadCell>World Series</TableHeadCell>
+			</TableHead>
+			<TableBody>
+				<TableBodyRow>
+					<MyTableBodyCell>{allStarAppearances}</MyTableBodyCell>
+					<MyTableBodyCell>{mvps}</MyTableBodyCell>
+					<MyTableBodyCell>{worldSeries}</MyTableBodyCell>
+				</TableBodyRow>
+			</TableBody>
+		</Table>
+	</div>
+	<div class="block md:hidden">
+		<Table striped={true}>
+			<TableHead>
+				<TableHeadCell>Career Earnings</TableHeadCell>
+				<TableHeadCell>Hall of Fame</TableHeadCell>
+			</TableHead>
+			<TableBody>
+				<TableBodyRow>
+					<MyTableBodyCell
+						>${totalSalary > 9 ? totalSalary / 10 + 'M' : totalSalary * 100 + 'k'}</MyTableBodyCell
+					>
+					<MyTableBodyCell>{allStarAppearances + mvps * 4 >= 15 ? '✓' : '✗'}</MyTableBodyCell>
 				</TableBodyRow>
 			</TableBody>
 		</Table>
