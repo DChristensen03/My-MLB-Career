@@ -12,7 +12,6 @@
 		Dropdown,
 		DropdownItem
 	} from 'flowbite-svelte';
-	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 
 	onMount(async () => {
 		if (localStorage.getItem('userid') === null) {
@@ -33,25 +32,8 @@
 	$: activeUrl = $page.url.pathname;
 </script>
 
-<div class="navbar">
-	<a href="/">Home</a>
-	<div class="dropdown">
-		<button class="dropbtn"
-			>Baseball
-			<i class="fa fa-caret-down" />
-		</button>
-		<div class="dropdown-content">
-			<a href="/baseball/game">Play Game</a>
-			<a href="/baseball/stats">Scoreboard</a>
-			<a href="/baseball/tutorial">Tutorial</a>
-		</div>
-	</div>
-	<a href="/info">Info</a>
-</div>
-
 <Navbar>
 	<NavBrand href="/">
-		<img src="" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
 			>My Sports Career</span
 		>
@@ -59,10 +41,8 @@
 	<NavHamburger />
 	<NavUl {activeUrl}>
 		<NavLi href="/">Home</NavLi>
-		<NavLi class="cursor-pointer"
-			>Baseball<ChevronDownOutline class="w-3 h-3 ml-2 text-primary-800 dark:text-white inline" />
-		</NavLi>
-		<Dropdown class="w-44 z-20">
+		<NavLi>Baseball</NavLi>
+		<Dropdown>
 			<DropdownItem href="/baseball/game">Play Game</DropdownItem>
 			<DropdownItem href="/baseball/stats">Scoreboard</DropdownItem>
 			<DropdownItem href="/baseball/tutorial">Tutorial</DropdownItem>
