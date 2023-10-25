@@ -52,6 +52,14 @@
 	});
 </script>
 
+<svelte:head>
+	<title>My Sports Career - Baseball Scoreboard</title>
+	<meta
+		name="description"
+		content="Explore Baseball Leaderboards - Stay up to date with the latest baseball records and rankings. Check all the latest records."
+	/>
+</svelte:head>
+
 <div class="flex flex-row justify-center gap-1">
 	<div>
 		<Label>

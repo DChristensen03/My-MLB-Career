@@ -227,6 +227,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>My Sports Career - Baseball Game</title>
+	<meta
+		name="description"
+		content="Experience Realistic Simulated Baseball Games - Play our immersive virtual baseball simulation, strategic gameplay, and thrilling seasons. Dive into the world of virtual baseball today!"
+	/>
+</svelte:head>
+
 <div>
 	{#if showStartForm}
 		<div class="flex flex-col items-center gap-2">
