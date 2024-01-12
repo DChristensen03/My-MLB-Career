@@ -1,0 +1,50 @@
+[
+	{
+		"name": "Ruden Behril",
+		"money": 1000000,
+		"smarts": 8,
+		"aggressiveness": 4
+	},
+	{
+		"name": "Zia Qua",
+		"money": 200000,
+		"smarts": 3,
+		"aggressiveness": 8
+	},
+	{
+		"name": "Cory Schwartz",
+		"money": 2000000,
+		"smarts": 10,
+		"aggressiveness": 6
+	},
+	{
+		"name": "Sybil Winchester",
+		"money": 500000,
+		"smarts": 5,
+		"aggressiveness": 5
+	},
+	{
+		"name": "Miles Oakley",
+		"money": 800000,
+		"smarts": 1,
+		"aggressiveness": 10
+	},
+	{
+		"name": "Kody Bradford",
+		"money": 1200000,
+		"smarts": 7,
+		"aggressiveness": 6
+	},
+	{
+		"name": "Heather Roscoe",
+		"money": 900000,
+		"smarts": 3,
+		"aggressiveness": 4
+	},
+	{
+		"name": "Wyman Ai",
+		"money": 600000,
+		"smarts": 2,
+		"aggressiveness": 9
+	}
+]

@@ -53,6 +53,14 @@
 			<DropdownItem href="/baseball/stats">Scoreboard</DropdownItem>
 			<DropdownItem href="/baseball/tutorial">Tutorial</DropdownItem>
 		</Dropdown>
+		<NavLi activeClass="text-primary-500" nonActiveClass="text-light hover:text-primary-500"
+			>Horse Racing</NavLi
+		>
+		<Dropdown>
+			<DropdownItem href="/horse-racing/game">Play Game</DropdownItem>
+			<DropdownItem href="/horse-racing/stats">Scoreboard</DropdownItem>
+			<DropdownItem href="/horse-racing/tutorial">Tutorial</DropdownItem>
+		</Dropdown>
 		<NavLi
 			activeClass="text-primary-500"
 			nonActiveClass="text-light hover:text-primary-500"
