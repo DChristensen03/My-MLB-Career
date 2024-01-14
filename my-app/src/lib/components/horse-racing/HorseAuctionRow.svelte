@@ -7,6 +7,14 @@
 	import getRandomInt from '$lib/utils/getRandomInt';
 	import { onMount } from 'svelte';
 	import { usd } from '$lib/utils/universal';
+	import {
+		bay,
+		black,
+		chestnut,
+		darkbay,
+		gray,
+		white
+	} from '$lib/images/Horse Racing Game Assets/PNG/Horse Character';
 
 	export let horse;
 
@@ -17,9 +25,11 @@
 	let currentBid = 0,
 		bidOwner = '',
 		expirationTime = Date.now() + 5000,
-		timeToExpiration = 5;
+		timeToExpiration = 5,
+		reservePrice;
 
-	let bloodstockComments;
+	let bloodstockComments,
+		aiBids = [];
 
 	updateExpirationTime();
 	setInterval(updateExpirationTime, 100);
@@ -27,6 +37,7 @@
 	onMount(() => {
 		bloodstockComments = generateComments(horse);
 		ended = false;
+		generateBids();
 	});
 
 	function updateExpirationTime() {
@@ -46,7 +57,7 @@
 			bidOwner = 'Player';
 		}
 
-		setTimeout(generateBids, 1000);
+		setTimeout(aiBid, 1000);
 		expirationTime = Date.now() + 5000;
 	}
 
@@ -67,22 +78,37 @@
 			} else {
 				maxBid = perceivedOverall * (10000 / (20 - (10 - owner.aggressiveness)));
 			}
-			if (owner.money > currentBid + 10000 && maxBid > currentBid + 10000) {
-				currentBid += 10000;
-				bidOwner = owner.name;
-				setTimeout(generateBids, 1000);
-				expirationTime = Date.now() + 5000;
-			} else if (owner.money > currentBid + 1000 && maxBid > currentBid + 1000) {
-				currentBid += 1000;
-				bidOwner = owner.name;
-				setTimeout(generateBids, 1000);
-				expirationTime = Date.now() + 5000;
-			} else if (owner.money > currentBid + 100 && maxBid > currentBid + 100) {
-				currentBid += 100;
-				bidOwner = owner.name;
-				setTimeout(generateBids, 1000);
-				expirationTime = Date.now() + 5000;
-			}
+			aiBids.push({ name: owner.name, maxBid, money: owner.money });
+		}
+		// Generate reserve
+		let totalBids = 0;
+		for (let bid of aiBids) {
+			totalBids += bid.maxBid;
+		}
+		reservePrice = totalBids / (aiBids.length * 2);
+		reservePrice = Math.ceil(reservePrice / 100) * 100;
+		currentBid = reservePrice;
+	}
+
+	function aiBid() {
+		for (let bid of aiBids) {
+			if (bid.name !== bidOwner)
+				if (bid.money > currentBid + 10000 && bid.maxBid > currentBid + 10000) {
+					currentBid += 10000;
+					bidOwner = bid.name;
+					setTimeout(aiBid, 1000);
+					expirationTime = Date.now() + 5000;
+				} else if (bid.money > currentBid + 1000 && bid.maxBid > currentBid + 1000) {
+					currentBid += 1000;
+					bidOwner = bid.name;
+					setTimeout(aiBid, 1000);
+					expirationTime = Date.now() + 5000;
+				} else if (bid.money > currentBid + 100 && bid.maxBid > currentBid + 100) {
+					currentBid += 100;
+					bidOwner = bid.name;
+					setTimeout(aiBid, 1000);
+					expirationTime = Date.now() + 5000;
+				}
 		}
 	}
 
@@ -103,8 +129,24 @@
 </script>
 
 <TableBodyRow>
+	<TableBodyCell>
+		{#if horse.color == 'Bay'}
+			<img src={bay} alt="horse-icon" style="max-width: 50px;" />
+		{:else if horse.color == 'Dark Bay'}
+			<img src={darkbay} alt="horse-icon" style="max-width: 50px;" />
+		{:else if horse.color == 'Chestnut'}
+			<img src={chestnut} alt="horse-icon" style="max-width: 50px;" />
+		{:else if horse.color == 'Black'}
+			<img src={black} alt="horse-icon" style="max-width: 50px;" />
+		{:else if horse.color == 'Gray'}
+			<img src={gray} alt="horse-icon" style="max-width: 50px;" />
+		{:else if horse.color == 'White'}
+			<img src={white} alt="horse-icon" style="max-width: 50px;" />
+		{/if}
+	</TableBodyCell>
 	<TableBodyCell>{horse.name}</TableBodyCell>
 	<TableBodyCell>{horse.color}</TableBodyCell>
+	<TableBodyCell>{usd.format(reservePrice)}</TableBodyCell>
 	<TableBodyCell
 		><Button
 			outline

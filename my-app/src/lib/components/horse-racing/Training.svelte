@@ -13,6 +13,8 @@
 
 	let speedUp, staminaUp, agilityUp;
 
+	const trainingCost = 5000;
+
 	$: speedUp > 0 ? setTimeout(() => (speedUp = 0), 3000) : '';
 	$: staminaUp > 0 ? setTimeout(() => (staminaUp = 0), 3000) : '';
 	$: agilityUp > 0 ? setTimeout(() => (agilityUp = 0), 3000) : '';
@@ -24,15 +26,16 @@
 		<InfoCircleOutline size="sm" />
 	</span>
 	<Tooltip triggeredBy="#training-tip">
-		Each piece of training will upgrade the horses potential. However, it will cost you $500 and
-		rest.
+		Each piece of training will upgrade the horses overall and get it tuned for a race. However, it
+		will cost you ${trainingCost}
+		and rest.
 	</Tooltip>
 </div>
 <div>
 	<ButtonGroup>
 		<Button
 			class="relative"
-			disabled={$userBalance - 500 < 0 || $userHorse.rest <= 0}
+			disabled={$userBalance - trainingCost < 0 || $userHorse.rest <= 0}
 			on:click={() => (speedUp = trainSpeed())}
 		>
 			Speed
@@ -47,7 +50,7 @@
 		</Button>
 		<Button
 			class="relative"
-			disabled={$userBalance - 500 < 0 || $userHorse.rest <= 0}
+			disabled={$userBalance - trainingCost < 0 || $userHorse.rest <= 0}
 			on:click={() => (staminaUp = trainStamina())}
 		>
 			Stamina
@@ -62,7 +65,7 @@
 		</Button>
 		<Button
 			class="relative"
-			disabled={$userBalance - 500 < 0 || $userHorse.rest <= 0}
+			disabled={$userBalance - trainingCost < 0 || $userHorse.rest <= 0}
 			on:click={() => (agilityUp = trainAgility())}
 		>
 			Agility

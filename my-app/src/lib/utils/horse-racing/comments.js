@@ -49,7 +49,7 @@ export function generateComments(horse) {
 	} else if (bsPotential > 70) {
 		comments += `Regardless of where it is now it probably has some room to improve.`;
 	} else if (bsPotential > 40) {
-		comments += `There's probably not a whole lot of room for improement.`;
+		comments += `There's probably not a whole lot of room for improvement.`;
 	} else {
 		comments += `This horse might just be better off not being allowed within 300 yards of a racetrack.`;
 	}

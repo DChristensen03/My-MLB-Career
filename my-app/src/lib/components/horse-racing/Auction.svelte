@@ -21,8 +21,10 @@
 >
 	<Table hoverable>
 		<TableHead>
+			<TableHeadCell />
 			<TableHeadCell>Name</TableHeadCell>
 			<TableHeadCell>Color</TableHeadCell>
+			<TableHeadCell>Reserve Price</TableHeadCell>
 			<TableHeadCell>Info</TableHeadCell>
 		</TableHead>
 		<TableBody>

@@ -2,10 +2,12 @@ import { userHorse, userBalance } from '$lib/stores/horseracing';
 import { get } from 'svelte/store';
 import getRandomInt from '../getRandomInt';
 
+const trainingCost = 5000;
+
 export function trainSpeed() {
 	let balance = get(userBalance);
-	if (balance - 500 >= 0) {
-		const amount = getRandomInt(1, 3);
+	if (balance - trainingCost >= 0) {
+		const amount = getRandomInt(1, 4);
 		let horse = get(userHorse);
 		if (horse.current.speed + amount > horse.potential.speed) {
 			horse.current.speed = horse.potential.speed;
@@ -14,7 +16,7 @@ export function trainSpeed() {
 		}
 		horse.rest -= 5;
 		userHorse.set(horse);
-		balance -= 500;
+		balance -= trainingCost;
 		userBalance.set(balance);
 		return amount;
 	}
@@ -23,8 +25,8 @@ export function trainSpeed() {
 
 export function trainStamina() {
 	let balance = get(userBalance);
-	if (balance - 500 >= 0) {
-		const amount = getRandomInt(1, 3);
+	if (balance - trainingCost >= 0) {
+		const amount = getRandomInt(1, 4);
 		let horse = get(userHorse);
 		if (horse.current.stamina + amount > horse.potential.stamina) {
 			horse.current.stamina = horse.potential.stamina;
@@ -33,7 +35,7 @@ export function trainStamina() {
 		}
 		horse.rest -= 5;
 		userHorse.set(horse);
-		balance -= 500;
+		balance -= trainingCost;
 		userBalance.set(balance);
 		return amount;
 	}
@@ -42,8 +44,8 @@ export function trainStamina() {
 
 export function trainAgility() {
 	let balance = get(userBalance);
-	if (balance - 500 >= 0) {
-		const amount = getRandomInt(1, 3);
+	if (balance - trainingCost >= 0) {
+		const amount = getRandomInt(1, 4);
 		let horse = get(userHorse);
 		if (horse.current.agility + amount > horse.potential.agility) {
 			horse.current.agility = horse.potential.agility;
@@ -51,8 +53,9 @@ export function trainAgility() {
 			horse.current.agility += amount;
 		}
 		horse.rest -= 5;
+		horse.tuning += horse.tuneUp;
 		userHorse.set(horse);
-		balance -= 500;
+		balance -= trainingCost;
 		userBalance.set(balance);
 		return amount;
 	}
