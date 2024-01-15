@@ -16,7 +16,7 @@
 </div>
 
 <div
-	class="w-1/2"
+	class="sm: w-full md:w-2/3 lg:w-1/2"
 	transition:fly={{ delay: 250, duration: 300, x: 0, y: 500, opacity: 0.5, easing: quintOut }}
 >
 	<Table hoverable>

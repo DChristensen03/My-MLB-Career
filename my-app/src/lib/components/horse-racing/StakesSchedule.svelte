@@ -2,25 +2,19 @@
 	import {
 		Modal,
 		Table,
-		TableBody,
-		TableBodyRow,
-		TableBodyCell,
 		TableHead,
 		TableHeadCell,
-		Button,
-		Toast,
+		TableBody,
+		TableBodyRow,
 		Label,
 		Select
 	} from 'flowbite-svelte';
-	import { CheckCircleOutline, CheckCircleSolid } from 'flowbite-svelte-icons';
+	import TableBodyCell from '$lib/MyTableBodyCell.svelte';
 	import races from '$lib/data/horse-races.json';
 	import { usd } from '$lib/utils/universal';
-	import { enteredRace, week } from '$lib/stores/horseracing';
-	import { fly } from 'svelte/transition';
-	import { userHorse } from '$lib/stores/horseracing';
 	import FormatDistance from '$lib/utils/horse-racing/FormatDistance';
 
-	let eligibleRaces = [];
+	export let open = false;
 
 	let type = 'all',
 		age = 'all',
@@ -51,43 +45,15 @@
 		{ value: 'route', name: 'Route' }
 	];
 
-	function enterRace(race) {
-		$enteredRace = race;
-		enterToastOpen = true;
-		setTimeout(() => (enterToastOpen = false), 5000);
-	}
+	let stakesRaces = [];
 
 	function filterRaces() {
-		let numWins = 0;
-		eligibleRaces = [];
-		for (let result of $userHorse.results) {
-			if (result.place == 1) {
-				numWins++;
-			}
-		}
+		stakesRaces = [];
 
-		for (let race of races.recurring) {
-			const raceAge = parseInt(race.age.substring(0, 1));
-			if ((race.age.includes('+') && $userHorse.age >= raceAge) || $userHorse.age === raceAge) {
-				if (
-					(type === 'all' || race.type === type) &&
-					(age === 'all' || race.age === age) &&
-					(distance === 'all' ||
-						(distance === 'sprint' && race.distance < 8) ||
-						(distance === 'mile' && race.distance == 8) ||
-						(distance === 'route' && race.distance > 8))
-				)
-					if (race.type === 'mdn' && numWins == 0) {
-						eligibleRaces.push(race);
-					} else if (race.type !== 'mdn') {
-						eligibleRaces.push(race);
-					}
-			}
-		}
-		if (races[($week + 1).toString()]) {
-			for (let race of races[($week + 1).toString()]) {
-				const raceAge = parseInt(race.age.substring(0, 1));
-				if ((race.age.includes('+') && $userHorse.age >= raceAge) || $userHorse.age === raceAge) {
+		for (let i = 0; i < 52; i++) {
+			if (races[i.toString()]) {
+				for (let race of races[i.toString()]) {
+					race.week = i;
 					if (
 						(type === 'all' || race.type === type) &&
 						(age === 'all' || race.age === age) &&
@@ -97,18 +63,14 @@
 							(distance === 'route' && race.distance > 8))
 					)
 						if (race.type === 'mdn' && numWins == 0) {
-							eligibleRaces.push(race);
+							stakesRaces.push(race);
 						} else if (race.type !== 'mdn') {
-							eligibleRaces.push(race);
+							stakesRaces.push(race);
 						}
 				}
 			}
 		}
 	}
-
-	export let open;
-
-	let enterToastOpen = false;
 
 	$: type, age, distance, open, filterRaces();
 </script>
@@ -128,20 +90,23 @@
 			<Select id="distance" items={raceDistances} bind:value={distance} />
 		</div>
 	</div>
-	<Table divClass="flex flex-row3">
+	<Table divClass="flex flex-row">
 		<TableHead>
 			<TableHeadCell>Name</TableHeadCell>
+			<TableHeadCell>Week</TableHeadCell>
 			<TableHeadCell>Type</TableHeadCell>
 			<TableHeadCell>Age</TableHeadCell>
 			<TableHeadCell>Distance</TableHeadCell>
 			<TableHeadCell>Purse</TableHeadCell>
-			<TableHeadCell>Enter</TableHeadCell>
 		</TableHead>
-		<TableBody>
-			{#each eligibleRaces as race}
+		<TableBody class="divide-y">
+			{#each stakesRaces as race}
 				<TableBodyRow>
 					<TableBodyCell>
 						{race.name}
+					</TableBodyCell>
+					<TableBodyCell>
+						{race.week}
 					</TableBodyCell>
 					<TableBodyCell>
 						{race.type.toUpperCase()}
@@ -155,34 +120,8 @@
 					<TableBodyCell>
 						{usd.format(race.purse)}
 					</TableBodyCell>
-					<TableBodyCell>
-						<Button
-							on:click={() => {
-								enterRace(race);
-								open = false;
-							}}
-							size="sm"
-						>
-							<CheckCircleOutline size="sm" />
-						</Button>
-					</TableBodyCell>
 				</TableBodyRow>
 			{/each}
 		</TableBody>
 	</Table>
 </Modal>
-
-<Toast
-	transition={fly}
-	params={{ x: -250, y: 600 }}
-	position="top-right"
-	color="green"
-	dismissable={false}
-	bind:open={enterToastOpen}
->
-	<svelte:fragment slot="icon">
-		<CheckCircleSolid class="w-5 h-5" />
-		<span class="sr-only">Check icon</span>
-	</svelte:fragment>
-	Race entered successfully.
-</Toast>

@@ -22,7 +22,7 @@ export function generateAuctionHorses() {
 			}),
 			color: horseColors[getRandomInt(0, horseColors.length)],
 			rest: 100,
-			restLoss: getRandomInt(35, 70),
+			restLoss: getRandomInt(50, 85),
 			tuning: 100,
 			tuneUp: getRandomInt(10, 15),
 			tuningLoss: getRandomInt(2, 5),
@@ -46,7 +46,8 @@ export function generateAuctionHorses() {
 
 export function generateHorse(level) {
 	let adjustment = level * 10;
-	if (level >= 8) adjustment = 80;
+	if (level === 9) adjustment = 85;
+	else if (level === 10) adjustment = 90;
 	const owner = get(horseOwners)[getRandomInt(0, get(horseOwners).length)].name;
 	return {
 		name: uniqueNamesGenerator({

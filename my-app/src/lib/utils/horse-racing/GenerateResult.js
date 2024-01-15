@@ -1,8 +1,15 @@
-import { enteredRace, raceResult, userBalance, userHorse, week } from '$lib/stores/horseracing';
+import {
+	enteredRace,
+	raceResult,
+	userBalance,
+	userHorse,
+	week,
+	year
+} from '$lib/stores/horseracing';
 import { get } from 'svelte/store';
 import { generateHorse } from './GenerateHorses';
 
-const payoutStructure = [0.6, 0.2, 0.13, 0.05, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01];
+const payoutStructure = [0.6, 0.2, 0.13, 0.05, 0.03, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01];
 
 export default async function GenerateResult() {
 	let results = [];
@@ -29,9 +36,11 @@ export default async function GenerateResult() {
 				horse.results.unshift({
 					name: get(enteredRace).name,
 					type: get(enteredRace).type,
+					distance: get(enteredRace).distance,
+					purse: get(enteredRace).purse,
 					winnings: results[i].amount,
 					place: i + 1,
-					date: get(week)
+					date: `${get(year)}/${get(week)}`
 				});
 			}
 		} else {
@@ -58,7 +67,6 @@ async function generateRaceTime(distance, horse) {
 	const tuningMultiplier = 1000 / (900 + horse.tuning);
 	const staminaPerFurlong = horse.current.stamina / distance;
 	const speed = ((150 + staminaPerFurlong) / 200) * (horse.current.speed / 10);
-	console.log(horse.name + ' ' + speed);
 	for (let i = 0; i < distance; i++) {
 		if (i % 4 === 0) {
 			totalTime.push(100 - speed * ((300 + horse.current.agility) / 400));

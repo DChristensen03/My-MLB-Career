@@ -47,7 +47,7 @@
 		class="absolute"
 		transition:scale={{
 			duration: 500,
-			delay: 500,
+			delay: 100,
 			opacity: 0.5,
 			start: 0.5,
 			easing: quintIn
