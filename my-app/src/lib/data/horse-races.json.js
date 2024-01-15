@@ -464,7 +464,7 @@ export default {
 		},
 		{ name: 'Mr Skeleton Stakes', type: 'l', age: '4+', distance: '7', purse: '125000', level: 7 },
 		{
-			name: 'Toothpick State Stakes',
+			name: 'Razorback Derby',
 			type: 'g1',
 			age: '3',
 			distance: '9',
