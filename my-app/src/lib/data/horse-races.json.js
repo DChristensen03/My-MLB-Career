@@ -481,48 +481,6 @@ export default {
 		}
 	],
 	14: [
-		{
-			name: 'Tempering Bump Stakes',
-			type: 'l',
-			age: '4+',
-			distance: '12',
-			purse: '200000',
-			level: 7
-		},
-		{ name: 'Excelsius Stakes', type: 'l', age: '4+', distance: '9', purse: '150000', level: 7 },
-		{
-			name: 'Curling Southeast Derby',
-			type: 'g1',
-			age: '3',
-			distance: '9',
-			purse: '1000000',
-			level: 10
-		},
-		{
-			name: 'Spiritshock Stakes',
-			type: 'g3',
-			age: '4+',
-			distance: '8.5',
-			purse: '150000',
-			level: 8
-		},
-		{ name: 'Mr Skeleton Stakes', type: 'l', age: '4+', distance: '7', purse: '125000', level: 7 },
-		{
-			name: 'Toothpick State Stakes',
-			type: 'g1',
-			age: '3',
-			distance: '9',
-			purse: '1500000',
-			level: 10
-		},
-		{
-			name: 'Corkyard Mile Stakes',
-			type: 'g3',
-			age: '4+',
-			distance: '8',
-			purse: '500000',
-			level: 8
-		},
 		{ name: 'Howi Nooner Stakes', type: 'l', age: '3', distance: '6', purse: '75000', level: 6 },
 		{ name: 'Boiler Stakes', type: 'l', age: '3', distance: '7', purse: '400000', level: 8 },
 		{ name: 'Down Mile Stakes', type: 'l', age: '3+', distance: '8', purse: '25000', level: 4 },
