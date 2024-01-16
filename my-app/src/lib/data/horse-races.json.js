@@ -10,7 +10,7 @@ export default {
 			age: '2',
 			distance: 5,
 			purse: 10000,
-			level: 1
+			level: 2.5
 		},
 		{
 			name: 'Maiden Special Weight',
@@ -18,7 +18,7 @@ export default {
 			age: '2',
 			distance: 6,
 			purse: 25000,
-			level: 2
+			level: 3
 		},
 		{
 			name: 'Maiden Special Weight',
@@ -26,7 +26,7 @@ export default {
 			age: '2',
 			distance: 7,
 			purse: 45000,
-			level: 3
+			level: 3.5
 		},
 		{
 			name: 'Maiden Special Weight',
@@ -121,6 +121,14 @@ export default {
 			purse: 60000,
 			level: 6
 		},
+		{
+			name: 'Allowance',
+			type: 'alw',
+			age: '2',
+			distance: 7.5,
+			purse: 100000,
+			level: 6.5
+		},
 		// 3 and up
 		{
 			name: 'Allowance',
@@ -169,6 +177,14 @@ export default {
 			distance: 8,
 			purse: 60000,
 			level: 6
+		},
+		{
+			name: 'Allowance',
+			type: 'alw',
+			age: '2',
+			distance: 8.5,
+			purse: 100000,
+			level: 6.5
 		}
 	],
 	2: [
